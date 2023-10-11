@@ -23,7 +23,7 @@ function Home() {
     console.log("datao", data);
     return (
         <>
-            <h1 className="text-red-400 text-7xl">Motatt data : {data}</h1>
+            <h1 className="text-red-800 text-7xl">Mottatt data : {data}</h1>
         </>
     );
 }

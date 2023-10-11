@@ -29,7 +29,6 @@ const LoginForm = () => {
                 });
                 console.log(res.data);
                 navigate("/user/dashboard");
-                setLogin(true);
             })
             .catch(() => {
                 console.log("error");

@@ -11,16 +11,9 @@ function App() {
             <Layout>
                 <Fragment>
                     <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route
-                            path="/user/*"
-                            element={
-                                <Routes>
-                                    <Route path="login" element={<LoginPage />} />
-                                    <Route path="register" element={<RegisterPage />} />
-                                </Routes>
-                            }
-                        />
+                        <Route path="/" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
+                        <Route path="/dashboard" element={<HomePage />} />
                     </Routes>
                 </Fragment>
             </Layout>

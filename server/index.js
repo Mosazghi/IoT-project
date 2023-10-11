@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import connectDB from "./config/db.config.js";
 import errorHandler from "./middleware/errorHandler.js";
+import userRouter from "./routes/user.route.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,8 +24,10 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
 app.use(errorHandler);
+app.use("/user", userRouter);
 
 app.get("/api", (req, res) => {
     res.json({ message: "IOT PROSJEKT" });
@@ -43,9 +46,9 @@ app.post("/qr", (req, res) => {
 app.use(express.static(path.join(__dirname, "..", "client/dist")));
 
 // For alle andre requests: send index.html som vil laste opp React applikasjonen
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "client/dist/index.html"));
-});
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "..", "client/dist/index.html"));
+// });
 
 app.listen(PORT, () => {
     console.log(`Server started on port  http://localhost:${PORT}`);

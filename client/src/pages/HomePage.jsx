@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-function Home() {
+function HomePage() {
     const [data, setData] = useState();
-    const urlWithProxy = "/api";
 
     useEffect(() => {
         let ignore = false;
@@ -28,4 +27,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default HomePage;

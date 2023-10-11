@@ -1,10 +1,9 @@
 import { Fragment } from "react";
-import ReactDOM from "react-dom/client";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./layouts/Layout";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
     return (
@@ -12,9 +11,16 @@ function App() {
             <Layout>
                 <Fragment>
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
+                        <Route path="/" element={<HomePage />} />
+                        <Route
+                            path="/user/*"
+                            element={
+                                <Routes>
+                                    <Route path="login" element={<LoginPage />} />
+                                    <Route path="register" element={<RegisterPage />} />
+                                </Routes>
+                            }
+                        />
                     </Routes>
                 </Fragment>
             </Layout>

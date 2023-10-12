@@ -5,7 +5,7 @@ const RegisterPage = () => {
     return (
         <div>
             <h1>REGISTER PAGE</h1>
-            <Form path="register"/>
+            <Form path="register" />
             <Link to="/" className="underline">
                 Allerede bruker?
             </Link>

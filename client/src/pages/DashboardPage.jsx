@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function HomePage() {
+function DashboardPage() {
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -27,4 +27,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default DashboardPage;

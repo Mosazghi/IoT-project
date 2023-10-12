@@ -6,7 +6,9 @@ const LoginPage = () => {
         <div>
             <h1>LOGIN PAGE</h1>
             <Form path="login" />
-            <Link to="/user/register" className="underline">Ny bruker?</Link>
+            <Link to="/register" className="underline">
+                Ny bruker?
+            </Link>
         </div>
     );
 };

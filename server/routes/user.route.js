@@ -3,6 +3,6 @@ import { handleLogin, logout, renderAdminDashboard } from "../controllers/authen
 import auth from "../middleware/auth.js";
 const router = express.Router();
 
-router.post("/", handleLogin);
+router.post("/login", handleLogin);
 
 export default router;

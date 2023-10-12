@@ -6,7 +6,7 @@ const RegisterPage = () => {
         <div>
             <h1>REGISTER PAGE</h1>
             <RegisterForm />
-            <Link to="/user/login" className="underline">
+            <Link to="/" className="underline">
                 Allerede bruker?
             </Link>
         </div>

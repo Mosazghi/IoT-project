@@ -27,13 +27,13 @@ const LoginForm = () => {
                 cookies.set("TOKEN", res.data.token, {
                     path: "/",
                 });
-                console.log(res.data);
-                navigate("/user/dashboard");
+                console.log("Res:", res.data);
+                navigate("/dashboard");
                 setLogin(true);
             })
             .catch(() => {
-                console.log("error");
-                throw new Error();
+                console.log("ERROR");
+                return new Error();
             });
     };
 

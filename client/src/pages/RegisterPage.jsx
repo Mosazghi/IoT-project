@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import RegisterForm from "../components/RegisterForm";
+import Form from "../components/Form";
 
 const RegisterPage = () => {
     return (
         <div>
             <h1>REGISTER PAGE</h1>
-            <RegisterForm />
+            <Form path="register" />
             <Link to="/" className="underline">
                 Allerede bruker?
             </Link>

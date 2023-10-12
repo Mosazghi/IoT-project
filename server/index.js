@@ -23,32 +23,15 @@ app.use((req, res, next) => {
     next();
 });
 
+// NØDVENDIG FOR Å HENTE UT DATA FRA POST REQUESTS
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 app.use(errorHandler);
+
 app.use("/user", userRouter);
-
-app.get("/api", (req, res) => {
-    res.json({ message: "IOT PROSJEKT" });
-});
-
-app.get("/test", (req, res) => {
-    res.json({ message: "TESTSSSS" });
-});
-
-app.post("/qr", (req, res) => {
-    console.log("QR CODE!!", req.body);
-    res.json({ message: "LETS GOO" });
-});
 
 // Sett opp statisk mappe (bilder, etc.)
 app.use(express.static(path.join(__dirname, "..", "client/dist")));
-
-// For alle andre requests: send index.html som vil laste opp React applikasjonen
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "..", "client/dist/index.html"));
-// });
 
 app.listen(PORT, () => {
     console.log(`Server started on port  http://localhost:${PORT}`);

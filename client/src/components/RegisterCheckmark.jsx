@@ -5,7 +5,7 @@ export default function RegisterCheckmark({ isAdmin, setAdmin }) {
                 <div className="flex items-center pt-1">
                     <input
                         type="checkbox"
-                        id="ch1"
+                        id="admin"
                         name="admin"
                         className="ml-2"
                         checked={isAdmin}

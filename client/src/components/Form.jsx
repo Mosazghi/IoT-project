@@ -5,13 +5,16 @@ import cookies from "../utils/cookies";
 import RegisterCheckmark from "./RegisterCheckmark";
 
 const Form = ({ path }) => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [admin, setAdmin] = useState(false);
+    const [error, setError] = useState("");
+
     const checkMark = path === "register" ? true : false;
+    const navigatePath = path === "register" ? "/" : "dashboard";
 
-    const navigate = useNavigate();
-
+    // Håndterer submit av formen
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -21,25 +24,25 @@ const Form = ({ path }) => {
             data: {
                 username,
                 password,
-                isAdmin,
+                admin,
             },
         };
-
         axios(configuration)
             .then((res) => {
                 cookies.set("TOKEN", res.data.token, {
                     path: "/",
                 });
-                console.log(res.data);
-                navigate("/dashboard");
+
+                // I tilfelle en error så vises den på siden
+                setError(res.data.message);
+                // Navigerer til dashboard (eller login)
+                navigate(navigatePath);
             })
-            .catch(() => {
-                console.log("error");
+            .catch((e) => {
+                setError(e.response.data.message);
                 return new Error();
             });
     };
-
-    console.log({ username, password }, isAdmin, path);
 
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -70,12 +73,13 @@ const Form = ({ path }) => {
                             onChange={(e) => setPassword(e.target.value)}
                         ></input>
                     </div>
-                    {checkMark && <RegisterCheckmark isAdmin={isAdmin} setAdmin={setIsAdmin} />}
+                    {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}
                     <div className="mt-2 flex justify-center">
                         <button className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white w-20 h-10 rounded-3xl  shadow-xl">
                             {checkMark ? "REGISTER" : "LOGIN"}
                         </button>
                     </div>
+                    {error && <p className="text-red-500 text-center mt-2">{error}</p>}
                 </div>
             </div>
         </form>

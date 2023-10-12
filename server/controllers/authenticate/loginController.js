@@ -46,9 +46,8 @@ const handleLogin = (req, res) => {
         });
 };
 
-const renderAdminDashboard = asyncHandler(async (req, res) => {
-    console.log(req.session);
-    res.send({ user: req.user });
+const handleRegister = asyncHandler(async (req, res) => { 
+    
 });
 
 const logout = (req, res) => {
@@ -56,4 +55,4 @@ const logout = (req, res) => {
     res.redirect("/");
 };
 
-export { handleLogin, logout, renderAdminDashboard };
+export { handleLogin, logout, handleRegister };

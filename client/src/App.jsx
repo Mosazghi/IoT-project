@@ -10,18 +10,18 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 function App() {
     return (
         <Router>
-            <Layout>
-                <Fragment>
-                    <Routes>
-                        <Route path="/" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/dashboard" element={<ProtectedRoute />}>
-                            <Route path="/dashboard" element={<DashboardPage />} />
-                        </Route>
-                        <Route path="*" element={<NoPage />} />
-                    </Routes>
-                </Fragment>
-            </Layout>
+            {/* <Layout> */}
+            <Fragment>
+                <Routes>
+                    <Route path="/" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/dashboard" element={<ProtectedRoute />}>
+                        <Route path="/dashboard" element={<DashboardPage />} />
+                    </Route>
+                    <Route path="*" element={<NoPage />} />
+                </Routes>
+            </Fragment>
+            {/* </Layout> */}
         </Router>
     );
 }

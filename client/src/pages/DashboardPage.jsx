@@ -2,7 +2,7 @@ import jwt from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
-import QR from "../components/QR";
+import QRCode from "react-qr-code";
 
 function DashboardPage() {
     const [data, setData] = useState();
@@ -37,12 +37,12 @@ function DashboardPage() {
 
     return (
         <>
-           <QR data={user.name}/> 
             <h1 className="text-red-800 text-7xl">Velkommen tilbake {user.name}!</h1>
             <p>Mottatt data fra backend: {data}</p>
             <button onClick={handleLogout} className="text-blue-400 font-extrabold p-4 border  border-red-500">
                 LOGUT
             </button>
+            <QRCode value={user.name}/>
         </>
     );
 }

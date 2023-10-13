@@ -7,6 +7,7 @@ export default defineConfig({
         proxy: {
             "/api": "http://localhost:5000",
             "/user": "http://localhost:5000",
+            "/mqttConnDetails": "http://localhost:5000",
         },
     },
     plugins: [react()],

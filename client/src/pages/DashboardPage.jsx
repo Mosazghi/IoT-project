@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import QRData from "../components/QRData";
 import SensorData from "../components/SensorData";
 import cookies from "../utils/cookies";
-import QRCode from "react-qr-code";
 
 function DashboardPage() {
     // Henter ut brukerens token fra cookies og dekoder den
@@ -17,7 +16,7 @@ function DashboardPage() {
             <h3 className="text-center text-2xl font-bold mb-5">
                 {isAdmin ? "Oversiktlig data" : "Her kan du scanne QR-koden"}
             </h3>
-            {isAdmin ? <SensorData /> : <QRData />}
+            {isAdmin ? <SensorData /> : <QRData data={user.name}/>}
         </>
     );
 }

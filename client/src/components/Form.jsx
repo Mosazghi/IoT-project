@@ -46,7 +46,7 @@ const Form = ({ path }) => {
 
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="flex h-screen">
+            <div className="flex">
                 <div className="m-auto">
                     <div>
                         <div className="flex justify-center">

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
-const Header = ({ user }) => {
+const DashboardHeader = ({ user }) => {
     const navigate = useNavigate();
 
     // Funksjon for å logge ut brukeren
@@ -22,4 +22,4 @@ const Header = ({ user }) => {
     );
 };
 
-export default Header;
+export default DashboardHeader;

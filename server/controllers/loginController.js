@@ -5,7 +5,7 @@ import User from "../models/userModel.js";
 
 const handleLogin = asyncHandler(async (req, res) => {
     // Sjekk om bruker finnes
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.username.toLowerCase() });
 
     if (!user) {
         res.status(401).send({
@@ -32,7 +32,7 @@ const handleLogin = asyncHandler(async (req, res) => {
 });
 const handleRegister = asyncHandler(async (req, res) => {
     // Sjekk om bruker finnes
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.username.toLowerCase() });
 
     if (user) {
         res.status(400).send({
@@ -44,7 +44,7 @@ const handleRegister = asyncHandler(async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         // Lag ny bruker
         const newUser = new User({
-            username: req.body.username,
+            username: req.body.username.toLowerCase(),
             password: hashedPassword,
             admin: req.body.admin,
         });

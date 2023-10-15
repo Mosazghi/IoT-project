@@ -9,28 +9,37 @@
 #define QR Serial1
 #define lys 33 
 String qrData;
+Mqtt mqtt("abdi", "IOT12345", "sensor");
+
+void getScannData();
 
 void setup(){
   Serial.begin(115200);
+  Serial.println("begin");
+  mqtt.connect();
   pinMode(lys, OUTPUT); 
-  QR.begin(9600, SERIAL_8N1, 26, 27); // Definimos el puerto serial del QR
+  Serial.println("setup light");
+  QR.begin(9600, SERIAL_8N1, 26, 27); 
+  Serial.println("QR.begin");
+}
+
+void loop(){
+  getScannData();
+  mqtt.subscribe("sensor");
 }
 
 void getScannData() {
   if (QR.available()) { // Ser om det er data i bufferet 
     qrData = "";  
-    digitalWrite(lys, HIGH); 
+    digitalWrite(lys, LOW);
     while (QR.available()) {
       char input = QR.read(); // Leser et char fra bufferet
       qrData += input; 
       delay(5);               
     }
     Serial.println(qrData);
+    // mqtt.publish("sensor", qrData);
   }
-  digitalWrite(lys, LOW);
+   digitalWrite(lys, HIGH); 
   delay(5); 
-}
-
-void loop(){
-  getScannData();
 }

@@ -3,15 +3,14 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
+
 Mqtt::Mqtt(const char* server, const char* pass, const char* mqtt) {
     ssid = server;
     password = pass;
     mqtt_server = mqtt;
 }
 
-void Mqtt::connect(const char* ssid, const char* password) {
-    WiFiClient espClient;
-    PubSubClient client(espClient);
+void Mqtt::connect() {
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
@@ -23,9 +22,18 @@ void Mqtt::connect(const char* ssid, const char* password) {
     Serial.println(WiFi.localIP());
 }
 
+void Mqtt::subscribe(String topic) {
+    WiFiClient espClient;
+    PubSubClient client(espClient);
+    if (!client.connected()) {
+        Serial.println("BRUH...");
+    }
+    client.subscribe(topic.c_str());
+}
+
 // void Mqtt::publish(String topic, String message) {
 //     if (!client.connected()) {
-//         reconnect();
+//         connect();
 //     }
 //     client.publish(topic.c_str(), message.c_str());
 // }

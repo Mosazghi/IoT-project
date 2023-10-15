@@ -16,7 +16,9 @@ function DashboardPage() {
             <h3 className="text-center text-2xl font-bold mb-5">
                 {isAdmin ? "Oversiktlig data" : "Her kan du scanne QR-koden"}
             </h3>
-            {isAdmin ? <SensorData /> : <QRData data={user.id} />}
+            <div className={!isAdmin ? "flex justify-center items-center" : ""}>
+                {isAdmin ? <SensorData /> : <QRData data={user.id} />}
+            </div>
         </>
     );
 }

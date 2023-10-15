@@ -72,7 +72,7 @@ const SensorData = () => {
     }, [connDetails]);
 
     if (!connDetails) {
-        return <div>Loading...</div>; // or show an error message
+        return <div>Loading...</div>;
     }
 
     return (

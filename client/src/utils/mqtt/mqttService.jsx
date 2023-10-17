@@ -8,7 +8,7 @@ export class MQTTService {
     }
 
     connect() {
-        this.mqttClient = mqtt.connect(this.host, { clientId: "WebApp" });
+        this.mqttClient = mqtt.connect("ws://10.24.103.178:9001", { clientId: "WebApp" });
 
         // MQTT Callback for 'error' event
         this.mqttClient.on("error", (err) => {

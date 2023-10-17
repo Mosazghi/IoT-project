@@ -3,6 +3,7 @@ import DashboardHeader from "../components/DashboardHeader";
 import QRData from "../components/QRData";
 import SensorData from "../components/SensorData";
 import cookies from "../utils/cookies";
+import React from "react";
 
 function DashboardPage() {
     // Henter ut brukerens token fra cookies og dekoder den

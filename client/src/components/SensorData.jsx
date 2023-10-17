@@ -77,15 +77,16 @@ const SensorData = () => {
     }
 
     return (
-        <div className="fixdde">
-            <Line data={data} options={options} height={200} width={400} />
-
+        <>
+            <div className="flex justify-center items-center">
+                <Line data={data} options={options} height={400} width={400} />
+            </div>
             {messages.map((ms, i) => (
                 <div key={i}>
                     <p>{JSON.stringify(ms)}</p>
                 </div>
             ))}
-        </div>
+        </>
     );
 };
 

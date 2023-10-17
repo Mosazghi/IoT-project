@@ -1,7 +1,7 @@
 import { parseISO } from "date-fns";
 const chartConfig = (sensorData) => {
     const data = {
-        labels: sensorData.map((data) => parseISO(data.timestamp, "yyyy-MM-dd HH:mm")),
+        labels: sensorData.map((data) => parseISO(data.timestamp, "yyyy-MM-dd")),
         datasets: [
             {
                 label: "Sensor Data",
@@ -17,7 +17,7 @@ const chartConfig = (sensorData) => {
             x: {
                 type: "time",
                 time: {
-                    unit: "minute", // Adjust as needed (hour, day, etc.)
+                    unit: "day", // Adjust as needed (hour, day, etc.)
                 },
                 title: {
                     display: true,

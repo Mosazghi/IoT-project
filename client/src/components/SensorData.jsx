@@ -16,6 +16,7 @@ import { Line } from "react-chartjs-2";
 import chartConfig from "../utils/chartConfig";
 import { useMqttConnDetails } from "../utils/mqtt/mqttConnDetails";
 import { MQTTService } from "../utils/mqtt/mqttService";
+import React from "react";
 
 ChartJS.register(
     LinearScale,

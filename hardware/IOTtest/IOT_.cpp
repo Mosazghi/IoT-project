@@ -2,20 +2,33 @@
 #include <Adafruit_BME280.h>
 #include <Adafruit_Sensor.h>
 #include "MqttIOT.h"
+#include "JsonIOT.h"
+#include "time.h"
 
-long lastMsg = 0;
-char msg[50];
-int value = 0;
+// millis 
+long lastMsg = 0; 
+
+// tid 
+const char* ntp = "pool.ntp.org";
+const long gmtOffset_sec = 7200;
+const int daylightOffset_sec = 0;
+struct tm dato;
+
+// sensor målinger
+float temperature = 0;
+float humidity = 0;
+float sensorValues[2];
 
 Adafruit_BME280 bme; // I2C
 
-float temperature = 0;
-float humidity = 0;
 
 // LED Pin
 void setup() {
   Serial.begin(115200);
   mqttInit();
+
+  // init and get the time
+  configTime(gmtOffset_sec, daylightOffset_sec, ntp);
 
   if (!bme.begin(0x76)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
@@ -30,27 +43,14 @@ void loop() {
   client.loop();
 
   long now = millis();
-  if (now - lastMsg > 5000) {
+  if (now - lastMsg > 5000) { 
     lastMsg = now;
     
-    test();
-    
     temperature = bme.readTemperature();   
-    
-    // Convert the value to a char array
-    char tempString[8];
-    dtostrf(temperature, 1, 2, tempString);
-    Serial.print("Temperature: ");
-    Serial.println(tempString);
-    client.publish("test", tempString);
-
     humidity = bme.readHumidity();
-    
-    // Convert the value to a char array
-    char humString[8];
-    dtostrf(humidity, 1, 2, humString);
-    Serial.print("Humidity: ");
-    Serial.println(humString);
-    client.publish("test", humString);
+    sensorValues[0] = temperature;
+    sensorValues[1] = humidity;
+
+    sendJson(sensorValues, dato, client, "test"); // send to MQTT broker
   }
 }

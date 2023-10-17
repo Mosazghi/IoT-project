@@ -58,6 +58,6 @@ void mqttReconnect() {
 void mqttInit() {
   pinMode(ledPin, OUTPUT);
   wifiInit();
-  client.setServer(MQTTSERVER, 1884);
+  client.setServer(MQTTSERVER, 1883);
   client.setCallback(mqttCallback);
 }

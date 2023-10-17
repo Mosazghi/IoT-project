@@ -46,34 +46,9 @@ void loop() {
     lastMsg = now;
     
     temperature = bme.readTemperature();   
-    sendJson(temperature, dato, client, "test"); // send Json to MQTT broker
-
-    // Convert the value to a char array
-    // char tempString[8];
-    // dtostrf(temperature, 1, 2, tempString);
-    // Serial.print("Temperature: ");
-    // Serial.println(tempString);
-    // client.publish("test", tempString);
+    sendJson(temperature, dato, client, "test"); // send to MQTT broker
 
     humidity = bme.readHumidity();
-    sendJson(temperature, dato, client, "test");
-    
-    // Convert the value to a char array
-    // char humString[8];
-    // dtostrf(humidity, 1, 2, humString);
-    // Serial.print("Humidity: ");
-    // Serial.println(humString);
-    // client.publish("test", humString);
-    // printLocalTime();
+    sendJson(temperature, dato, client, "test"); // send to MQTT broker
   }
 }
-
-// void printLocalTime()
-// {
-//   struct tm timeinfo;
-//   if(!getLocalTime(&timeinfo)){
-//     Serial.println("Failed to obtain time");
-//     return;
-//   }
-//   Serial.println(&timeinfo, "%A, %B %d %Y %H:%M:%S");
-// }

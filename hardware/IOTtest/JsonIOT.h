@@ -5,7 +5,6 @@
 #include "MqttIOT.h"
 
 
-bool convertTmToJson(struct tm time, JsonVariant jsonVariant);
-void sendJson(float data, struct tm time, PubSubClient client, const char* topic);
+void sendJson(float data, struct tm time, PubSubClient &client, const char* topic);
 
 #endif

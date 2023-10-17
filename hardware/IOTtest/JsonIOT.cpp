@@ -27,8 +27,8 @@ void sendJson(float data, struct tm time, PubSubClient &client, const char* topi
     
     // Set the values in the document
     char timeBuffer[32];
-    strftime(timeBuffer, sizeof(timeBuffer), "%A, %B %d %Y %H:%M:%S", &time);
-    doc["time"] = timeBuffer;
+    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M%z", &time);
+    doc["timestamp"] = timeBuffer;
     doc["value"] = sensorString;
 
     // Serialize JSON document

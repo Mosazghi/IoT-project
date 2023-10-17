@@ -48,7 +48,7 @@ void loop() {
     temperature = bme.readTemperature();   
     sendJson(temperature, dato, client, "test"); // send to MQTT broker
 
-    humidity = bme.readHumidity();
-    sendJson(temperature, dato, client, "test"); // send to MQTT broker
+    // humidity = bme.readHumidity();
+    // sendJson(temperature, dato, client, "test"); // send to MQTT broker
   }
 }

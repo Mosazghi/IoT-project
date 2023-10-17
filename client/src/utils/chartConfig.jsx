@@ -1,7 +1,7 @@
 import { parseISO } from "date-fns";
 const chartConfig = (sensorData) => {
     const data = {
-        labels: sensorData.map((data) => parseISO(data.timestamp, "yyyy-MM-dd HH:mm:ss")),
+        labels: sensorData.map((data) => parseISO(data.timestamp, "yyyy-MM-dd HH:mm")),
         datasets: [
             {
                 label: "Sensor Data",
@@ -29,6 +29,9 @@ const chartConfig = (sensorData) => {
                 title: {
                     display: true,
                     text: "Temperatur [°C]",
+                },
+                ticks: {
+                    display: false, // Set display to false to hide the y-axis ticks
                 },
             },
         },

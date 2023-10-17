@@ -2,9 +2,9 @@ import QRCode from "react-qr-code";
 
 const QRData = ({ data }) => {
     return (
-        <h4 className="text-center ml-5">
+        <div className="text-center ml-5 flex justify-center">
             <QRCode value={data} />
-        </h4>
+        </div>
     );
 };
 export default QRData;

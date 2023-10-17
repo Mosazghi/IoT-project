@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
 import RegisterCheckmark from "./RegisterCheckmark";
-import React from "react";
 
 const Form = ({ path }) => {
     const navigate = useNavigate();

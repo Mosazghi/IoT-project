@@ -1,15 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
-import IconContent from "./IconContent";
 import { FaUserLarge } from "react-icons/fa6";
 import { FaPowerOff } from "react-icons/fa6";
-import React, { useState } from "react";
+import  { useState } from "react";
 
 
 
 const DashboardHeader = ({ user }) => {
     const [showUser, setShowUser] = useState(false);
-    const [showLogout, setShowLogout] = useState(false);
     const navigate = useNavigate();
 
     // Funksjon for å logge ut brukeren

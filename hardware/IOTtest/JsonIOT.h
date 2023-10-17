@@ -4,7 +4,6 @@
 #include <ArduinoJson.h>
 #include "MqttIOT.h"
 
-
-void sendJson(float data, struct tm time, PubSubClient &client, const char* topic);
+void sendJson(float data[], struct tm time, PubSubClient &client, const char* topic);
 
 #endif

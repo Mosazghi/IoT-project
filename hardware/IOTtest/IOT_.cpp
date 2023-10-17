@@ -17,6 +17,7 @@ struct tm dato;
 // sensor målinger
 float temperature = 0;
 float humidity = 0;
+float sensorValues[2];
 
 Adafruit_BME280 bme; // I2C
 
@@ -46,9 +47,10 @@ void loop() {
     lastMsg = now;
     
     temperature = bme.readTemperature();   
-    sendJson(temperature, dato, client, "test"); // send to MQTT broker
+    humidity = bme.readHumidity();
+    sensorValues[0] = temperature;
+    sensorValues[1] = humidity;
 
-    // humidity = bme.readHumidity();
-    // sendJson(temperature, dato, client, "test"); // send to MQTT broker
+    sendJson(sensorValues, dato, client, "test"); // send to MQTT broker
   }
 }

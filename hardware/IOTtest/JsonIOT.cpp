@@ -8,7 +8,7 @@
 *   @param topic - const char* (MQTT topic)
 *   @param time - struct tm (datoen til dataen)
 */
-void sendJson(float data, struct tm time, PubSubClient &client, const char* topic) {
+void sendJson(float data[], struct tm time, PubSubClient &client, const char* topic) {
     // get the time
     if(!getLocalTime(&time)){
         Serial.println("Failed to obtain time");
@@ -17,10 +17,14 @@ void sendJson(float data, struct tm time, PubSubClient &client, const char* topi
     Serial.println(&time, "%A, %B %d %Y %H:%M:%S");
  
     // convert the value to a char array
-    char sensorString[8];
-    dtostrf(data, 1, 2, sensorString);
-    Serial.print("Sensor value: ");
-    Serial.println(sensorString);
+    char temperatureString[8];
+    char humidityString[8];
+    dtostrf(data[0], 1, 2, temperatureString);
+    dtostrf(data[1], 1, 2, humidityString);
+    Serial.print("Temperature: ");
+    Serial.println(temperatureString);
+    Serial.print("Humidity: ");
+    Serial.println(humidityString);
 
     // Create the JSON document
     StaticJsonDocument<200> doc;
@@ -29,7 +33,11 @@ void sendJson(float data, struct tm time, PubSubClient &client, const char* topi
     char timeBuffer[32];
     strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M%z", &time);
     doc["timestamp"] = timeBuffer;
-    doc["value"] = sensorString;
+
+    // Create a JSON object for the "value" field
+    JsonObject sensorJson = doc.createNestedObject("values");
+    sensorJson["Temperature"] = temperatureString;
+    sensorJson["Humidity"] = humidityString;
 
     // Serialize JSON document
     char jsonBuffer[512];

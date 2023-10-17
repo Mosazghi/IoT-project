@@ -32,6 +32,7 @@ const chartConfig = (sensorData) => {
                 },
             },
         },
+        maintainAspectRatio: false,
         responsive: true,
     };
     return { data, options };

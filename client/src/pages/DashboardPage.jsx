@@ -4,6 +4,7 @@ import QRData from "../components/QRData";
 import SensorData from "../components/SensorData";
 import cookies from "../utils/cookies";
 
+
 function DashboardPage() {
     // Henter ut brukerens token fra cookies og dekoder den
     const token = cookies.get("TOKEN");

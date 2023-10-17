@@ -9,6 +9,7 @@ import {
     Title,
     Tooltip,
 } from "chart.js";
+
 import "chartjs-adapter-date-fns";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
@@ -29,12 +30,13 @@ ChartJS.register(
     Title
 );
 
+
 const SensorData = () => {
     const [messages, setMessages] = useState([]);
     const connDetails = useMqttConnDetails();
     const { data, options } = chartConfig(messages);
 
-    useEffect(() => {
+useEffect(() => {
         if (connDetails) {
             const { mqttServer, mqttTopic } = connDetails;
 
@@ -75,9 +77,22 @@ const SensorData = () => {
         return <div>Loading...</div>;
     }
 
+    const chartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'second',
+                },
+            },
+        },
+    };
+
     return (
-        <div>
-            <Line data={data} options={options} />
+        <div style={{ position: "relative", margin: "auto", width: "80vw" }}>
+            <Line data={data} options={options} height={400} />
 
             {messages.map((ms, i) => (
                 <div key={i}>

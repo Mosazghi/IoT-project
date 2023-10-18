@@ -5,7 +5,6 @@
 #include <PubSubClient.h>
 #include "WiFiIOT.h"
 
-#define ledPin 18
 #define MQTTSERVER "10.24.103.178"
 
 extern PubSubClient client;

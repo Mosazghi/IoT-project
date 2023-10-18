@@ -14,10 +14,10 @@ Adafruit_SGP30 sgp;
 const long interval = 3;
 unsigned long prevMillis = 0;
 unsigned long currentMillis = 0;
-const int TEMP_HUMID_STATE = 1;
-const int CO2_PRESSURE_STATE = 2;
+const int BME280_STATE = 1;
+const int SG90_STATE = 2;
 
-int currentState = TEMP_HUMID_STATE;  // Start med å vise temperatur og fuktighet
+int currentState = BME280_STATE;  // Start med å vise temperatur og fuktighet
 
 void setup() {
   Serial.begin(115200);
@@ -95,7 +95,7 @@ void loop() {
 
         display.clearDisplay();
 
-        if (currentState == TEMP_HUMID_STATE) {
+        if (currentState == BME280_STATE) {
             displayTemp();
             displayHumid();
         } else if (currentState == CO2_PRESSURE_STATE) {
@@ -104,7 +104,7 @@ void loop() {
         }
         display.display();
         // Bytt til neste tilstand
-        currentState = (currentState == TEMP_HUMID_STATE) ? CO2_PRESSURE_STATE : TEMP_HUMID_STATE;
+        currentState = (currentState == BME280_STATE) ? SG90_STATE : BME280_STATE;
     }
 }
 

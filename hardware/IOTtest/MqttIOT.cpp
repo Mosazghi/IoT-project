@@ -14,24 +14,6 @@ void mqttCallback(char* topic, byte* message, unsigned int length) {
     messageTemp += (char)message[i];
   }
   Serial.println();
-
-  // Feel free to add more if statements to control more GPIOs with MQTT
-
-  // If a message is received on the topic esp32/output, you check if the message is either "on" or "off". 
-  // Changes the output state according to the message¨
-  Serial.print("message recieved:" );
-  Serial.println(messageTemp);
-  if (String(topic) == "test") {
-    Serial.print("Changing output to ");
-    if(messageTemp == "on"){
-      Serial.println("on");
-      digitalWrite(ledPin, HIGH);
-    }
-    else if(messageTemp == "off"){
-      Serial.println("off");
-      digitalWrite(ledPin, LOW);
-    }
-  }
 }
 
 void test() {
@@ -56,7 +38,6 @@ void mqttReconnect() {
   }
 }
 void mqttInit() {
-  pinMode(ledPin, OUTPUT);
   wifiInit();
   client.setServer(MQTTSERVER, 1883);
   client.setCallback(mqttCallback);

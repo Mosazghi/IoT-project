@@ -22,7 +22,10 @@ struct tm dato;
 // sensor målinger
 float temperature = 0;
 float humidity = 0;
-float sensorValues[2];
+float pressure = 0;
+float co2val = 0;
+//float sensorValues[2];
+float sensorValues[4];
 
 // LED Pin
 void setup() {
@@ -95,22 +98,22 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }
 
-    /*Serial monitor*/
-    Serial.println("------------------------------------------------------------");
-    Serial.println("\tROOM 100: ");
-    Serial.print("\t\tTemperatur = ");
-    Serial.print(bme.readTemperature());
-    Serial.println("°C");
-    Serial.print("\t\tFuktighet = ");
-    Serial.print(bme.readHumidity());
-    Serial.println(" %");
-    Serial.print("\t\teCO2-nivå = ");
-    //Serial.print(sgp.eCO2);
-    Serial.print(sgp.eCO2); Serial.println(" ppm");
-    Serial.print("\t\tTrykknivå = ");
-    Serial.print(bme.readPressure() / 100.0F);
-    Serial.println(" hPa");
-    Serial.println("------------------------------------------------------------");
+    // /*Serial monitor*/
+    // Serial.println("------------------------------------------------------------");
+    // Serial.println("\tROOM 100: ");
+    // Serial.print("\t\tTemperatur = ");
+    // Serial.print(bme.readTemperature());
+    // Serial.println("°C");
+    // Serial.print("\t\tFuktighet = ");
+    // Serial.print(bme.readHumidity());
+    // Serial.println(" %");
+    // Serial.print("\t\teCO2-nivå = ");
+    // //Serial.print(sgp.eCO2);
+    // Serial.print(sgp.eCO2); Serial.println(" ppm");
+    // Serial.print("\t\tTrykknivå = ");
+    // Serial.print(bme.readPressure() / 100.0F);
+    // Serial.println(" hPa");
+    // Serial.println("------------------------------------------------------------");
 
       /* OLED-skjermvisning basert på tidsintervall */
       if (currentTime - prevMillis >= (interval * 1000)) {
@@ -136,8 +139,12 @@ void loop() {
     
     temperature = bme.readTemperature();   
     humidity = bme.readHumidity();
+    co2val = sgp.eCO2;
+    pressure = bme.readPressure();
     sensorValues[0] = temperature;
     sensorValues[1] = humidity;
+    sensorValues[2] = co2val;
+    sensorValues[3] = pressure;
 
     sendJson(sensorValues, dato, client, "test"); // send to MQTT broker
   }

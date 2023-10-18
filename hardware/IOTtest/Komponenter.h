@@ -21,8 +21,6 @@ unsigned long currentMillis = 0;
 const int BME280_STATE = 1;
 const int SG90_STATE = 2;
 
-
-
 unsigned long currentTime = 0;
 unsigned long lastTrigger = 0;
 bool startTimer = false;

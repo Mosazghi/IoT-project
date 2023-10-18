@@ -1,3 +1,4 @@
+#include "stdlib_noniso.h"
 #include "JsonIOT.h"
 
 /**
@@ -19,12 +20,20 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     // convert the value to a char array
     char temperatureString[8];
     char humidityString[8];
+    char co2valString[8];
+    char pressureString[8];
     dtostrf(data[0], 1, 2, temperatureString);
     dtostrf(data[1], 1, 2, humidityString);
+    dtostrf(data[2], 1, 2, co2valString);  
+    dtostrf(data[3], 1, 2, pressureString); 
     Serial.print("Temperature: ");
     Serial.println(temperatureString);
     Serial.print("Humidity: ");
     Serial.println(humidityString);
+    Serial.print("CO2-level: ");
+    Serial.println(co2valString);
+    Serial.print("Pressure: ");   
+    Serial.println(pressureString);
 
     // Create the JSON document
     StaticJsonDocument<200> doc;
@@ -38,6 +47,9 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     JsonObject sensorJson = doc.createNestedObject("values");
     sensorJson["Temperature"] = temperatureString;
     sensorJson["Humidity"] = humidityString;
+    sensorJson["CO2-level"] = co2valString;
+    sensorJson["Pressure"] = temperatureString;
+
 
     // Serialize JSON document
     char jsonBuffer[512];

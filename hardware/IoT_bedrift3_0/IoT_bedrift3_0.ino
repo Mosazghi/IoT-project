@@ -88,7 +88,6 @@ void loop() {
   Serial.print(bme.readPressure() / 100.0F);
   Serial.println(" hPa");
   Serial.println("------------------------------------------------------------");
-  delay(2000);
 
     /* OLED-skjermvisning basert på tidsintervall */
     if (currentTime - prevMillis >= (interval * 1000)) {

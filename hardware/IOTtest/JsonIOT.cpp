@@ -31,7 +31,7 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     
     // Set the values in the document
     char timeBuffer[32];
-    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M%z", &time);
+    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
     doc["timestamp"] = timeBuffer;
 
     // Create a JSON object for the "value" field

@@ -1,11 +1,12 @@
 import { parseISO } from "date-fns";
 const chartConfig = (sensorData) => {
+    console.log(sensorData[0]?.timestamp);
     const data = {
-        labels: sensorData.map((data) => parseISO(data.timestamp, "yyyy-MM-dd")),
+        labels: sensorData.map((data) => data?.timestamp),
         datasets: [
             {
                 label: "Sensor Data",
-                data: sensorData.map((data) => data.value),
+                data: sensorData.map((data) => data?.values.Temperature / 500),
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.1,
@@ -17,7 +18,7 @@ const chartConfig = (sensorData) => {
             x: {
                 type: "time",
                 time: {
-                    unit: "day", // Adjust as needed (hour, day, etc.)
+                    unit: "second", // Adjust as needed (hour, day, etc.)
                 },
                 title: {
                     display: true,
@@ -28,10 +29,10 @@ const chartConfig = (sensorData) => {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: "Temperatur [°C]",
+                    text: "KWh",
                 },
                 ticks: {
-                    display: false, // Set display to false to hide the y-axis ticks
+                    display: true, // Set display to false to hide the y-axis ticks
                 },
             },
         },

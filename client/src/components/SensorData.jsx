@@ -34,7 +34,7 @@ const SensorData = () => {
     const [messages, setMessages] = useState([]);
     const connDetails = useMqttConnDetails();
     const { data, options } = chartConfig(messages);
-
+    // @ts-ignore
     useEffect(() => {
         if (connDetails) {
             const { mqttServer, mqttTopic } = connDetails;

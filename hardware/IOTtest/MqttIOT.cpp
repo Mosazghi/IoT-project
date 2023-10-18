@@ -16,9 +16,6 @@ void mqttCallback(char* topic, byte* message, unsigned int length) {
   Serial.println();
 }
 
-void test() {
-  Serial.println("It works");
-}
 void mqttReconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {

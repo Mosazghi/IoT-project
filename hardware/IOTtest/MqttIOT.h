@@ -10,7 +10,6 @@
 extern PubSubClient client;
 
 void mqttInit();
-void test();
 void mqttCallback(char* topic, byte* message, unsigned int length);
 void mqttReconnect();
 

@@ -116,22 +116,23 @@ void loop() {
     // Serial.println("------------------------------------------------------------");
 
       /* OLED-skjermvisning basert på tidsintervall */
-      if (currentTime - prevMillis >= (interval * 1000)) {
-          prevMillis = currentTime;
+  if (currentTime - prevMillis >= (interval * 1000)) {
+    prevMillis = currentTime;
 
-          display.clearDisplay();
+    display.clearDisplay();
 
-          if (currentState == BME280_STATE) {
-              displayTemp();
-              displayHumid();
-          } else if (currentState == SG90_STATE) {
-              displayCO2();
-              displayPressure();
-          }
-          display.display();
-          // Bytt til neste tilstand
-          currentState = (currentState == BME280_STATE) ? SG90_STATE : BME280_STATE;
-      }
+    if (currentState == BME280_STATE) {
+        displayTemp();
+        displayHumid();
+    } else if (currentState == SG90_STATE) {
+        displayCO2();
+        displayPressure();
+    }
+    display.display();
+    // Bytt til neste tilstand
+    currentState = (currentState == BME280_STATE) ? SG90_STATE : BME280_STATE;
+  }
+  
   /* MQTT */
   long now = millis();
   if (now - lastMsg > 5000) { 

@@ -6,15 +6,20 @@ import { fileURLToPath } from "url";
 import connectDB from "./config/db.config.js";
 import errorHandler from "./middleware/errorHandler.js";
 import userRouter from "./routes/user.route.js";
-
+import getDailyData from "./utils/dailyData/getDailyData.js";
+import getMqttDetails from "./utils/mqttConnDetails.js";
+import initRecieveQRCodes from "./utils/scannedQRCodesMqtt.js";
+import initRecieveSensorData from "./utils/sensorData.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const PORT = 5000;
 const app = express();
 
 dotenv.config();
 connectDB(process.env.DATABASE_URL);
+initRecieveQRCodes();
+initRecieveSensorData();
+setInterval(getDailyData, 1000 * 60);
 app.use(cors());
 
 //LOGGER
@@ -28,20 +33,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(errorHandler);
 
+// ROUTES
 app.use("/user", userRouter);
-
-app.get("/api", (req, res) => {
-    res.json({ message: "API is runsssssning" });
-});
-
-app.get("/mqttConnDetails", (req, res) => {
-    res.send(
-        JSON.stringify({
-            mqttServer: process.env.MQTT_BROKER,
-            mqttTopic: process.env.MQTT_TOPIC,
-        })
-    );
-});
+// app.use("/qr", getTotalScannedQR);
+app.get("/mqttConnDetails", getMqttDetails);
 
 // Sett opp statisk mappe (bilder, etc.)
 app.use(express.static(path.join(__dirname, "..", "client/dist")));

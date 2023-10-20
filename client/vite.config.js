@@ -8,6 +8,7 @@ export default defineConfig({
             "/api": "http://localhost:5000",
             "/user": "http://localhost:5000",
             "/mqttConnDetails": "http://localhost:5000",
+            "/qr": "http://localhost:5000",
         },
     },
     plugins: [react()],

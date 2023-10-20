@@ -1,12 +1,10 @@
-import { parseISO } from "date-fns";
 const chartConfig = (sensorData) => {
-    console.log(sensorData[0]?.timestamp);
     const data = {
         labels: sensorData.map((data) => data?.timestamp),
         datasets: [
             {
                 label: "Sensor Data",
-                data: sensorData.map((data) => data?.values.Temperature / 500),
+                data: sensorData.map((data) => data.data.temperature),
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.1,
@@ -18,7 +16,7 @@ const chartConfig = (sensorData) => {
             x: {
                 type: "time",
                 time: {
-                    unit: "second", // Adjust as needed (hour, day, etc.)
+                    unit: "minute", // Adjust as needed (hour, day, etc.)
                 },
                 title: {
                     display: true,

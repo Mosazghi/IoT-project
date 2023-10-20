@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import NoPage from "./pages/NoPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import SOMPage from "./pages/SOMPage";
 import React from "react";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LoginPage />} />
                         <Route path="/register" element={<RegisterPage />} />
+                        <Route path="/SOM" element={<SOMPage />} />
                         <Route path="/dashboard" element={<ProtectedRoute />}>
                             <Route path="/dashboard" element={<DashboardPage />} />
                         </Route>

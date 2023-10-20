@@ -39,7 +39,7 @@ export class MQTTService {
     }
 
     end() {
-        this.client.end();
+        this.mqttClient.end();
     }
 
     // Publish MQTT Message

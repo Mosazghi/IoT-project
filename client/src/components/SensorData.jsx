@@ -38,6 +38,8 @@ const SensorData = () => {
     const { data, options } = chartConfig(messages);
     // @ts-ignore
     useEffect(() => {
+        let mqttService;
+
         if (connDetails) {
             const { mqttServer, mqttTopic } = connDetails;
 
@@ -60,18 +62,18 @@ const SensorData = () => {
                 console.log(`MQTT connection closed!`);
             };
 
-            const initializeMQTTConnection = () => {
-                console.log(`Initializing connection to :: ${mqttServer}, topic :: ${mqttTopic}`);
-                const fnCallbacks = { onConnect, onMessage, onError, onClose };
-
-                const mqttService = new MQTTService(mqttServer, fnCallbacks);
-                mqttService.connect();
-
-                mqttService.subscribe(mqttTopic);
-            };
-
-            initializeMQTTConnection();
+            console.log(`Initializing connection to :: ${mqttServer}, topic :: ${mqttTopic}`);
+            const fnCallbacks = { onConnect, onMessage, onError, onClose };
+            mqttService = new MQTTService(mqttServer, fnCallbacks);
+            mqttService.connect();
+            mqttService.subscribe(mqttTopic);
         }
+
+        return () => {
+            if (mqttService) {
+                mqttService.end();
+            }
+        };
     }, [connDetails]);
 
     if (!connDetails) {
@@ -91,20 +93,20 @@ const SensorData = () => {
                 unit={"°C"}
                 title={"Temperatur"}
             />
-            {/* <GaugeData
+            <GaugeData
                 value={messages.map((data) => data?.data.humidity)}
                 min={Constants.HUMIDITY_MIN}
                 max={Constants.HUMIDITY_MAX}
-                unit={}
+                unit={"%"}
                 title={"Humidity"}
             />
             <GaugeData
                 value={messages.map((data) => data?.data.co2)}
                 min={Constants.CO2_MIN}
                 max={Constants.CO2_MAX}
-                unit={}
+                unit={"ppm"}
                 title={"C02"}
-            /> */}
+            />
             {messages.map((ms, i) => (
                 <div key={i}>
                     <p>{JSON.stringify(ms)}</p>

@@ -17,13 +17,13 @@ const DashboardHeader = ({ user }) => {
     };
 
     return (
-        <header className="transition-all flex flex-row justify-between shadow-md p-3 items-center mb-5">
+        <header className="transition-all flex flex-row justify-between shadow-lg p-3 items-center mb-5">
             <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold">DASHBOARD</h1>
             <div className="flex justify-items-end gap-2">
                 <div>
                     <button
                         onClick={() => setShowUser(!showUser)}
-                        className="w-12 h-12 bg-slate-200 hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
+                        className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500      rounded-full grid justify-items-center content-center"
                         > 
                         <FaUserLarge className="text-2xl text-white" />
                     </button>
@@ -32,7 +32,7 @@ const DashboardHeader = ({ user }) => {
                 <div>
                     <button
                         onClick={handleLogout}
-                        className="w-12 h-12 bg-slate-200 hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
+                        className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
                         > 
                         <FaPowerOff className="text-2xl text-white" />
                     </button>

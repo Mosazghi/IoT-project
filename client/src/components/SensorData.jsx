@@ -91,21 +91,18 @@ const SensorData = () => {
                 min={Constants.TEMPERATURE_MIN}
                 max={Constants.TEMPERATURE_MAX}
                 unit={"°C"}
-                title={"Temperatur"}
             />
             <GaugeData
                 value={messages.map((data) => data?.data.humidity)}
                 min={Constants.HUMIDITY_MIN}
                 max={Constants.HUMIDITY_MAX}
                 unit={"%"}
-                title={"Humidity"}
             />
             <GaugeData
                 value={messages.map((data) => data?.data.co2)}
                 min={Constants.CO2_MIN}
                 max={Constants.CO2_MAX}
                 unit={"ppm"}
-                title={"C02"}
             />
             {messages.map((ms, i) => (
                 <div key={i}>

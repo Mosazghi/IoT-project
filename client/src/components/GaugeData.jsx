@@ -1,6 +1,6 @@
 import ReactSpeedometer from "react-d3-speedometer";
 
-const GaugeData = ({ value, min, max, title, unit }) => {
+const GaugeData = ({ value, min, max, unit }) => {
     console.log("value", value);
     value = parseFloat(value[value.length - 1]) ? parseFloat(value[value.length - 1]) : min;
     return (
@@ -19,8 +19,6 @@ const GaugeData = ({ value, min, max, title, unit }) => {
                 endColor="red"
                 currentValueText={`${value} ${unit}`}
             />
-
-            <div className="text-center">{title}</div>
         </div>
     );
 };

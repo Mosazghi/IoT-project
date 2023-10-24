@@ -7,35 +7,41 @@ import connectDB from "./config/db.config.js";
 import errorHandler from "./middleware/errorHandler.js";
 import userRouter from "./routes/user.route.js";
 import getDailyData from "./utils/dailyData/getDailyData.js";
-import getMqttDetails from "./utils/mqttConnDetails.js";
+import getMqttDetails from "./utils/mqtt/mqttConnDetails.js";
 import initRecieveQRCodes from "./utils/scannedQRCodesMqtt.js";
 import initRecieveSensorData from "./utils/sensorData.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const PORT = 5000;
 const app = express();
 
 dotenv.config();
 connectDB(process.env.DATABASE_URL);
+
+// Initierer henting av data fra MQTT (og lagrer det i databasen)
 initRecieveQRCodes();
 initRecieveSensorData();
-setInterval(getDailyData, 1000 * 60);
-app.use(cors());
 
-//LOGGER
+// Sender daglig data til clienten (pr 1 minutt)
+setInterval(getDailyData, 1000 * 6);
+
+// Request-logger
 app.use((req, res, next) => {
     console.log(`HTTP Method - ${req.method}, URL - ${req.url}`);
     next();
 });
 
-// NØDVENDIG FOR Å HENTE UT DATA FRA POST REQUESTS
+// CORS - for å kunne sende requests fra clienten
+app.use(cors());
+
+// Nødvendig for å kunne parse JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(errorHandler);
 
-// ROUTES
+// Ruter
 app.use("/user", userRouter);
-// app.use("/qr", getTotalScannedQR);
 app.get("/mqttConnDetails", getMqttDetails);
 
 // Sett opp statisk mappe (bilder, etc.)

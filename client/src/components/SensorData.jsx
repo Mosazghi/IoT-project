@@ -1,57 +1,47 @@
-import {
-    Chart as ChartJS,
-    Legend,
-    LineController,
-    LineElement,
-    LinearScale,
-    PointElement,
-    TimeScale,
-    Title,
-    Tooltip,
-} from "chart.js";
-
-import "chartjs-adapter-date-fns";
 import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import chartConfig from "../utils/chartConfig";
+import { Bar, Line } from "react-chartjs-2";
+import barChartConfig from "../configs/barChartConfig";
+import configureCharts from "../configs/chartConfig";
+import lineChartConfig from "../configs/lineChartConfig";
 import { Constants } from "../utils/constants";
 import { useMqttConnDetails } from "../utils/mqtt/mqttConnDetails";
 import { MQTTService } from "../utils/mqtt/mqttService";
 import GaugeData from "./GaugeData";
 
-ChartJS.register(
-    LinearScale,
-    PointElement,
-    Tooltip,
-    Legend,
-    TimeScale,
-    LineController,
-    LineElement,
-    PointElement,
-    LinearScale,
-    Title
-);
+// Konfigurerer ChartJS
+configureCharts();
 
 const SensorData = () => {
-    const [messages, setMessages] = useState([]);
+    // Bruker useState for å lagre data fra MQTT i en array
+    // (sensorData for data fra sensoren og statsData for daglig-statistikk)
+    const [sensorData, setSensorData] = useState([]);
+    const [statsData, setStatsData] = useState([]);
+
+    // Henter ut MQTT-tilkoblingsdetaljer fra serveren (MQTT-server, topic1 og topic2)
     const connDetails = useMqttConnDetails();
-    const { data, options } = chartConfig(messages);
-    // @ts-ignore
+
+    // Konfigurerer linje- og søylediagrammet
+    const { dataLine, optionsLine } = lineChartConfig(sensorData);
+    const { dataBar, optionsBar } = barChartConfig(statsData);
+
     useEffect(() => {
         let mqttService;
 
         if (connDetails) {
-            const { mqttServer, mqttTopic } = connDetails;
+            const { mqttServer, mqttTopic1, mqttTopic2 } = connDetails;
 
             const onConnect = (message) => {
                 console.log(`MQTT Connected :: ${message}`);
             };
 
+            // Når en melding mottas, legg den til i listen over meldinger (sensorData eller statsData)
             const onMessage = (topic, message) => {
-                const stringResponse = message.toString();
-                const messageResponse = JSON.parse(stringResponse);
-                console.log(`MQTT Message received :: `, messageResponse);
-                setMessages((prevMessages) => [...prevMessages, messageResponse]);
+                const messageResponse = JSON.parse(message.toString());
+                console.log(`MQTT Message received :: `, messageResponse, topic);
+
+                // Legg til i sensorData hvis topic er mqttTopic1 (sensor), ellers legg til i statsData (stats)
+                if (topic === mqttTopic1) setSensorData((prevMessages) => [...prevMessages, messageResponse]);
+                if (topic === mqttTopic2) setStatsData(messageResponse);
             };
 
             const onError = (error) => {
@@ -62,11 +52,12 @@ const SensorData = () => {
                 console.log(`MQTT connection closed!`);
             };
 
-            console.log(`Initializing connection to :: ${mqttServer}, topic :: ${mqttTopic}`);
+            console.log(`Initializing connection to :: ${mqttServer}, topics :: ${mqttTopic1} and ${mqttTopic2}`);
             const fnCallbacks = { onConnect, onMessage, onError, onClose };
             mqttService = new MQTTService(mqttServer, fnCallbacks);
             mqttService.connect();
-            mqttService.subscribe(mqttTopic);
+            mqttService.subscribe(mqttTopic1);
+            mqttService.subscribe(mqttTopic2);
         }
 
         return () => {
@@ -79,37 +70,35 @@ const SensorData = () => {
     if (!connDetails) {
         return <div>Loading...</div>;
     }
-    console.log("dataaaa", messages);
+    console.log("dataaaa", sensorData);
 
     return (
-        <>
-            <div className="flex justify-center items-center">
-                <Line data={data} options={options} height={400} width={400} />
+        <div className="grid grid-cols-2 h-screen">
+            <div className="flex flex-col h-[40%] min-w-[72%]">
+                <Line data={dataLine} options={optionsLine} height={300} width={250} />
+                <Bar data={dataBar} options={optionsBar} height={300} width={250} />
             </div>
-            <GaugeData
-                value={messages.map((data) => data?.data.temperature)}
-                min={Constants.TEMPERATURE_MIN}
-                max={Constants.TEMPERATURE_MAX}
-                unit={"°C"}
-            />
-            <GaugeData
-                value={messages.map((data) => data?.data.humidity)}
-                min={Constants.HUMIDITY_MIN}
-                max={Constants.HUMIDITY_MAX}
-                unit={"%"}
-            />
-            <GaugeData
-                value={messages.map((data) => data?.data.co2)}
-                min={Constants.CO2_MIN}
-                max={Constants.CO2_MAX}
-                unit={"ppm"}
-            />
-            {messages.map((ms, i) => (
-                <div key={i}>
-                    <p>{JSON.stringify(ms)}</p>
-                </div>
-            ))}
-        </>
+            <div className="flex flex-col justify-start">
+                <GaugeData
+                    value={sensorData.map((data) => data?.data.temperature)}
+                    min={Constants.TEMPERATURE_MIN}
+                    max={Constants.TEMPERATURE_MAX}
+                    unit={"°C"}
+                />
+                <GaugeData
+                    value={sensorData.map((data) => data?.data.humidity)}
+                    min={Constants.HUMIDITY_MIN}
+                    max={Constants.HUMIDITY_MAX}
+                    unit={"%"}
+                />
+                <GaugeData
+                    value={sensorData.map((data) => data?.data.co2)}
+                    min={Constants.CO2_MIN}
+                    max={Constants.CO2_MAX}
+                    unit={"ppm"}
+                />
+            </div>
+        </div>
     );
 };
 

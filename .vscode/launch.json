@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/mosa/IoT-project/hardware/IOTtest",
-      "program": "/home/mosa/IoT-project/hardware/IOTtest/build/Debug/outDebug",
+      "cwd": "/home/mosa/IoT-project/hardware/scanner",
+      "program": "/home/mosa/IoT-project/hardware/scanner/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

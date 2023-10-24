@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Oppretter et skjema for QR-koder som er skannet i databasen
 const scannedQRCodeSchema = new mongoose.Schema({
     codeData: {
         type: String,

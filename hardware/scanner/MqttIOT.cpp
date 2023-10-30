@@ -2,13 +2,12 @@
 
 PubSubClient client(espClient);
 
-
-void mqttCallback(char* topic, byte* message, unsigned int length) {
+void mqttCallback(char *topic, byte *message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
   Serial.print(". Message: ");
   String messageTemp;
-  
+
   for (int i = 0; i < length; i++) {
     Serial.print((char)message[i]);
     messageTemp += (char)message[i];
@@ -36,6 +35,6 @@ void mqttReconnect() {
 }
 void mqttInit() {
   wifiInit();
-  client.setServer(MQTTSERVER, 1883);
+  client.setServer(MQTTSERVER, 1884);
   client.setCallback(mqttCallback);
 }

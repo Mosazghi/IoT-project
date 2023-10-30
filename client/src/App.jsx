@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
+    console.log("App");
     return (
         <Router>
             <Layout>

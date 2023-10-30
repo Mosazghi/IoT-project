@@ -1,6 +1,9 @@
+#include "JsonIOT.h"
 #include "MqttIOT.h"
+#include "time.h"
 #define QR Serial1
 #define TOPIC "qr"
+struct tm dato;
 
 String QRdata;
 
@@ -13,25 +16,24 @@ void setup() {
 void getQR();
 
 void loop() {
-   if (!client.connected()) {
+  if (!client.connected()) {
     mqttReconnect();
   }
   client.loop();
-  
+
   getQR();
 }
 
 void getQR() {
-  if (QR.available()){
-    while (QR.available()) 
-    {
-      char input = QR.read(); 
-      // Serial.print(input);    
+  if (QR.available()) {
+    while (QR.available()) {
+      char input = QR.read();
+      // Serial.print(input);
       QRdata += input;
       delay(5);
     }
     Serial.println(QRdata);
-    client.publish(TOPIC,QRdata.c_str());
+    sendJson(QRdata, dato, client, TOPIC);
     Serial.println();
   }
   QRdata = "";

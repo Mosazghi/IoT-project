@@ -36,8 +36,8 @@ void setup() {
 
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW);
   
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
     Serial.println(F("SSD1306 allocation failed"));
@@ -51,9 +51,9 @@ void setup() {
     Serial.println("Sensor not found :(");
     while (1);
   }
-  if (! sgp.IAQmeasure()){
-    Serial.println("Measurement failed");
-    return;
+  if (!sgp.IAQinit()) {
+    Serial.println("SGP30 initialization failed");
+    while (1);
   }
     // Init ESP-NOW
   if (esp_now_init() != ESP_OK) {
@@ -61,8 +61,9 @@ void setup() {
     return;
   }
 
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
+  sgp.setIAQBaseline(0x8F25, 0x86C0); // Kalibreringsverdier (hentet fra eksempel)
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW);
   display.clearDisplay();
   display.setTextColor(WHITE);
   // Once ESPNow is successfully Init, we will register for recv CB to
@@ -72,19 +73,25 @@ void setup() {
 
 
 void loop() {
+
   if (!client.connected()) {
     mqttReconnect();
   }
   client.loop();
+
+  if (!sgp.IAQmeasure()) {
+    Serial.println("Measurement failed");
+    return;
+  }
 
     /* ESP32-NOW */
   currentTime = millis();
   if(incomingPirSensor){
       startTimer = true;
       lastTrigger = millis(); // Starter/restarter timer
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(relayPin, HIGH);
 
-    if((digitalRead(ledPin) == HIGH) && (motion == false)) {
+    if(digitalRead(relayPin == HIGH) && (motion == false)){
       Serial.println("\tBevegelse detektert -> LYS PÅ...\n");
       motion = true;
     }
@@ -95,7 +102,7 @@ void loop() {
     Serial.println("\tIngen bevegelse detektert -> LYS AV...\n");
     startTimer = false;
     motion = false;
-    digitalWrite(ledPin, LOW);
+    digitalWrite(relayPin, LOW);
   }
 
     // /*Serial monitor*/
@@ -107,8 +114,8 @@ void loop() {
     // Serial.print("\t\tFuktighet = ");
     // Serial.print(bme.readHumidity());
     // Serial.println(" %");
-    // Serial.print("\t\teCO2-nivå = ");
-    // //Serial.print(sgp.eCO2);
+    Serial.print("\t\teCO2-nivå = ");
+    Serial.print(sgp.eCO2);
     // Serial.print(sgp.eCO2); Serial.println(" ppm");
     // Serial.print("\t\tTrykknivå = ");
     // Serial.print(bme.readPressure() / 100.0F);

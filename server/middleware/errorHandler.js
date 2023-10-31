@@ -1,3 +1,4 @@
+// Error håndtering "middleware" som tar i mot en feil og sender en respons tilbake til klienten
 const errorHandler = (err, req, res, next) => {
     const statusCode = res.statusCode ? res.statusCode : 500;
 

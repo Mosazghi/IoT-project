@@ -50,10 +50,10 @@ const Form = ({ path }) => {
                 <div className="m-auto">
                     <div>
                         <div className="flex justify-center">
-                            <p className="font-bold text-5xl"> {checkMark ? "REGISTER" : "LOGIN"}</p>
+                            <p className="font-bold text-5xl"> {checkMark ? "SIGN UP" : "LOGIN"}</p>
                         </div>
                         <div>
-                            <p className="text-black mt-10">Brukernavn</p>
+                            <p className="text-black mt-10">Username</p>
                         </div>
                         <input
                             className="border-2 w-96 h-10 rounded-2xl shadow-inner pl-2 mt-2"
@@ -64,7 +64,7 @@ const Form = ({ path }) => {
                         ></input>
 
                         <div>
-                            <p className="text-black mt-3">Passord</p>
+                            <p className="text-black mt-3">Password</p>
                         </div>
 
                         <input
@@ -77,11 +77,11 @@ const Form = ({ path }) => {
                     </div>
                     {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}
                     <div className="mt-2 flex items-center gap-3 justify-center">
-                        <button className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white w-20 h-10 rounded-3xl  shadow-xl">
+                        <button className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white w-20 h-10 rounded-3xl  shadow-lg shadow-orange-300/50">
                             {checkMark ? "REGISTER" : "LOGIN"}
                         </button>
                         <Link to={path === "login" ? "/register" : "/"} className="underline">
-                            {path === "login" ? "Ny bruker?" : "Allerede bruker?"}
+                            {path === "login" ? "New user?" : "Already a user?"}
                         </Link>
                     </div>
 

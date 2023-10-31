@@ -1,23 +1,41 @@
+#include "JsonIOT.h"
+#include "MqttIOT.h"
+#include "time.h"
 #define QR Serial1
+#define TOPIC "qr"
+struct tm dato;
 
-void setup()
-{
+String QRdata;
 
+void setup() {
   Serial.begin(115200);
-  QR.begin(9600, SERIAL_8N1, 26, 27); // Definimos el puerto serial del QR
+  QR.begin(9600, SERIAL_8N1, 26, 27); // Intialize QR scanner
+  mqttInit();
 }
 
-void loop()
-{
-  if (QR.available()) // Compruebe si hay datos entrantes en el búfer en serie
-  {
-    while (QR.available()) // Siga leyendo byte a byte desde el búfer hasta que el búfer esté vacío
-    {
-      char input = QR.read(); // Lee 1 byte de datos y lo guarda en una variable
-      Serial.print(input);    // Imprime el byte
-      delay(5);               // un pequeño retraso
+void getQR();
+
+void loop() {
+  if (!client.connected()) {
+    mqttReconnect();
+  }
+  client.loop();
+
+  getQR();
+}
+
+void getQR() {
+  if (QR.available()) {
+    while (QR.available()) {
+      char input = QR.read();
+      // Serial.print(input);
+      QRdata += input;
+      delay(5);
     }
+    Serial.println(QRdata);
+    sendJson(QRdata, dato, client, TOPIC);
     Serial.println();
   }
-  delay(5); // un pequeño retraso
+  QRdata = "";
+  delay(5);
 }

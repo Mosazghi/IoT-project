@@ -2,7 +2,7 @@ import express from "express";
 import { handleLogin, handleRegister } from "../controllers/loginController.js";
 const router = express.Router();
 
-// Lager en route ("/user") for å håndtere logge inn og registrere brukere
+// En route ("/user") for å håndtere logging in og registrere brukere
 router.post("/login", handleLogin);
 router.post("/register", handleRegister);
 

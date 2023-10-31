@@ -12,7 +12,7 @@ const handleLogin = asyncHandler(async (req, res) => {
             message: "Invalid username or password",
         });
     } else {
-        // Sjekk om passord er riktig ved å sammenligne (dekryptert) hash med passordet som ble sendt inn
+        // Sjekk om passord er riktig ved å sammenligne (dekryptert) hash-passorder med passordet som ble mottatt
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) {
             res.status(401).send({
@@ -23,6 +23,8 @@ const handleLogin = asyncHandler(async (req, res) => {
             const token = jwt.sign({ id: user._id, name: user.username, admin: user.admin }, process.env.JWT_SECRET, {
                 expiresIn: "1h",
             });
+
+            // Send respons til klienten med token og lagrer det som en cookie
             res.status(200).send({
                 message: "Login successful",
                 token,
@@ -42,6 +44,7 @@ const handleRegister = asyncHandler(async (req, res) => {
         // Hash passordet før det lagres i databasen
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
         // Lag ny bruker
         const newUser = new User({
             username: req.body.username.toLowerCase(),
@@ -50,6 +53,8 @@ const handleRegister = asyncHandler(async (req, res) => {
         });
         // Lagre bruker i databasen
         const savedUser = await newUser.save();
+
+        // Send respons til klienten
         res.status(200).send({
             message: "User created successfully",
             savedUser,

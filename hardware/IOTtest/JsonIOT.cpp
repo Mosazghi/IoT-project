@@ -44,11 +44,11 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     doc["timestamp"] = timeBuffer;
 
     // Create a JSON object for the "value" field
-    JsonObject sensorJson = doc.createNestedObject("values");
-    sensorJson["Temperature"] = temperatureString;
-    sensorJson["Humidity"] = humidityString;
-    sensorJson["CO2-level"] = co2valString;
-    sensorJson["Pressure"] = temperatureString;
+    JsonObject sensorJson = doc.createNestedObject("data");
+    sensorJson["temperature"] = temperatureString;
+    sensorJson["humidity"] = humidityString;
+    sensorJson["co2"] = co2valString;
+    sensorJson["pressure"] = temperatureString;
 
 
     // Serialize JSON document

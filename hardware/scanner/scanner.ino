@@ -26,7 +26,6 @@ void getQR() {
     while (QR.available()) 
     {
       char input = QR.read(); 
-      // Serial.print(input);    
       QRdata += input;
       delay(5);
     }

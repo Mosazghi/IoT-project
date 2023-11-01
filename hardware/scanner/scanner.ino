@@ -1,5 +1,5 @@
-#include "MqttIOT.h"
 #include "JsonIOT.h"
+#include "MqttIOT.h"
 #include "time.h"
 #define QR Serial1
 #define TOPIC "qr"
@@ -16,20 +16,19 @@ void setup() {
 void getQR();
 
 void loop() {
-   if (!client.connected()) {
+  if (!client.connected()) {
     mqttReconnect();
   }
   client.loop();
-  
+
   getQR();
 }
 
 void getQR() {
-  if (QR.available()){
-    while (QR.available()) 
-    {
-      char input = QR.read(); 
-      // Serial.print(input);    
+  if (QR.available()) {
+    while (QR.available()) {
+      char input = QR.read();
+      // Serial.print(input);
       QRdata += input;
       delay(5);
     }

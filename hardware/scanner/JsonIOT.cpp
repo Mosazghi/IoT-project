@@ -16,7 +16,6 @@ void sendJson(String data, struct tm time, PubSubClient &client, const char *top
     return;
   }
   Serial.println(&time, "%A, %B %d %Y %H:%M:%S");
-
   // convert the value to a char array
 
   Serial.print("qr-data: ");

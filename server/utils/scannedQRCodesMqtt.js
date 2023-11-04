@@ -1,7 +1,7 @@
 import ScannedQRCode from "../models/scannedQRModel.js";
 import client from "./mqtt/mqttClient.js";
 
-// Listen for new QR code scans
+// "Lytte" på nye QR-code-data fra MQTT og lagre dem i databasen
 const initRecieveQRCodes = () => {
     client.on("message", async (topic, message) => {
         if (topic === "qr") {

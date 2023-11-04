@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Oppretter et skjema for sensorer som er skannet i databasen
 const sensorSchema = new mongoose.Schema({
     data: {
         temperature: Number,

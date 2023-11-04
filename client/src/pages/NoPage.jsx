@@ -1,3 +1,4 @@
+// Ikke-funn side
 const NoPage = () => {
     return (
         <div>

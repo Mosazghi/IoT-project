@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Kobler til databasen 
 const connectDB = (URL) => {
     mongoose.connect(URL, {
         useNewUrlParser: true,

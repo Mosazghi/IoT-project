@@ -2,12 +2,12 @@
 #include "JsonIOT.h"
 
 /**
-*   Sender dato og data til MQTT brokeren i Json format
+*   @brief Sender dato og data til MQTT brokeren i Json format
 * 
-*   @param data - float (sensor data som skal sendes)
-*   @param client - Refreanse overført til PubSubClient client i main (MQTT klient)
-*   @param topic - const char* (MQTT topic)
-*   @param time - struct tm (datoen til dataen)
+*   @param data float (sensor data som skal sendes)
+*   @param client Refreanse overført til PubSubClient client i main (MQTT klient)
+*   @param topic const char* (MQTT topic)
+*   @param time struct tm (datoen til dataen)
 */
 void sendJson(float data[], struct tm time, PubSubClient &client, const char* topic) {
     // get the time
@@ -26,7 +26,7 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     dtostrf(data[1], 1, 2, humidityString);
     dtostrf(data[2], 1, 2, co2valString);  
     dtostrf(data[3], 1, 2, pressureString); 
-    Serial.print("Temperature: ");
+    
     Serial.println(temperatureString);
     Serial.print("Humidity: ");
     Serial.println(humidityString);

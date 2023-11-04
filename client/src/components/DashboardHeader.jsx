@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FaPowerOff, FaUserLarge } from "react-icons/fa6";
+import { FaDatabase, FaDiagramNext, FaDiagramSuccessor, FaPowerOff, FaQrcode, FaUserLarge } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
 
-const DashboardHeader = ({ user }) => {
+const DashboardHeader = ({ user, toggleSwitch, showData }) => {
     const [showUser, setShowUser] = useState(false);
     const navigate = useNavigate();
 
@@ -13,10 +13,24 @@ const DashboardHeader = ({ user }) => {
         navigate("/");
     };
 
+    const handleShowUser = () => { 
+        toggleSwitch();
+    };
+
     return (
         <header className="transition-all flex flex-row justify-between shadow-lg p-3 items-center mb-5 w-full">
             <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold">DASHBOARD</h1>
             <div className="flex justify-items-end gap-2">
+                <div>
+                { user.admin && (
+                        <button
+                        onClick={handleShowUser}
+                        className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500      rounded-full grid justify-items-center content-center"
+                        > {/* Change the icon based on the state */}
+                        {showData? <FaQrcode className="text-2xl text-white"/> : <FaDatabase className="text-2xl text-white"/>}
+                        </button>
+                )}
+                </div>
                 <div>
                     <button
                         onClick={() => setShowUser(!showUser)}

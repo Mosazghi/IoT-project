@@ -9,12 +9,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-<<<<<<< HEAD
         "concurrently": "^7.0.0",
         "react-d3-speedometer": "^1.1.0",
         "react-icons": "^4.11.0"
-=======
-        "concurrently": "^7.0.0"
->>>>>>> 0f83bf3ab5fc2e39b763b2800ab137d2af5baeeb
     }
 }

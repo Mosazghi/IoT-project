@@ -10,6 +10,7 @@ function DashboardPage() {
     const token = cookies.get("TOKEN");
     const user = jwt(token);
     const isAdmin = user.admin;
+    console.log(isAdmin);
 
     return (
         <>
@@ -17,7 +18,7 @@ function DashboardPage() {
             <h3 className="text-center text-2xl font-bold mb-5">
                 {isAdmin ? "Oversiktlig data" : "Her kan du scanne QR-koden"}
             </h3>
-            {!isAdmin ? <SensorData /> : <QRData data={user.id} />}
+            {isAdmin ? <SensorData /> : <QRData data={user.id} />}
         </>
     );
 }

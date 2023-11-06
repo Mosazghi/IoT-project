@@ -147,6 +147,6 @@ void loop() {
     sensorValues[2] = co2val;
     sensorValues[3] = pressure;
 
-    sendJson(sensorValues, dato, client, "test"); // send to MQTT broker
+    sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
   }
 }

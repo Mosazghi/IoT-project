@@ -28,34 +28,37 @@ const SensorData = () => {
     useEffect(() => {
         let mqttService;
 
+        // Hvis MQTT-tilkoblingsdetaljer er hentet fra serveren, opprett en MQTT-tilkobling
         if (connDetails) {
             const { mqttServer, mqttTopic1, mqttTopic2 } = connDetails;
 
             const onConnect = (message) => {
-                console.log(`MQTT Connected :: ${message}`);
+                console.log(`MQTT tilkoblet! :: ${message}`);
             };
 
             // Når en melding mottas, legg den til i listen over meldinger (sensorData eller statsData)
             const onMessage = (topic, message) => {
                 const messageResponse = JSON.parse(message.toString());
-                console.log(`MQTT Message received :: `, messageResponse, topic);
+                console.log(`MQTT melding mottatt :: `, messageResponse, topic);
 
-                // Legg til i sensorData hvis topic er mqttTopic1 (sensor), ellers legg til i statsData (stats)
+                // Legg til i motatt data basert på topic - statistikk eller sensordata
                 if (topic === mqttTopic1) setSensorData((prevMessages) => [...prevMessages, messageResponse]);
                 if (topic === mqttTopic2) setStatsData(messageResponse);
             };
 
             const onError = (error) => {
-                console.log(`Error encountered :: ${error}`);
+                console.log(`Error oppdaget :: ${error}`);
             };
 
             const onClose = () => {
-                console.log(`MQTT connection closed!`);
+                console.log(`MQTT tilkobling avbrutt!`);
             };
 
-            console.log(`Initializing connection to :: ${mqttServer}, topics :: ${mqttTopic1} and ${mqttTopic2}`);
+            console.log(`Initialiserer tilkobling til :: ${mqttServer}, topics :: ${mqttTopic1} og ${mqttTopic2}`);
+
             const fnCallbacks = { onConnect, onMessage, onError, onClose };
             mqttService = new MQTTService(mqttServer, fnCallbacks);
+            // Starter tilkoblingen til MQTT-serveren og abonnerer på topic1 og topic2
             mqttService.connect();
             mqttService.subscribe(mqttTopic1);
             mqttService.subscribe(mqttTopic2);

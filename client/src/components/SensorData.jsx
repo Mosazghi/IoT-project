@@ -75,31 +75,37 @@ const SensorData = () => {
 
     return (
         <div className="grid-cols-1 grid-rows-3 h-screen">
-            <div className="flex flex-col h-[40%] min-w-[72%]">
-                <Bar data={dataBar} options={optionsBar} height={300} width={250} />
+            <div className="w-full bg-white rounded-2xl shadow-md">
+                 <Bar data={dataBar} options={optionsBar} height={300} width={250} />
             </div>
-            <div className="flex flex-row justify-center">
-                <GaugeData
-                    value={sensorData.map((data) => data?.data.temperature)}
-                    min={Constants.TEMPERATURE_MIN}
-                    max={Constants.TEMPERATURE_MAX}
-                    unit={"°C"}
-                />
-                <GaugeData
-                    value={sensorData.map((data) => data?.data.humidity)}
-                    min={Constants.HUMIDITY_MIN}
-                    max={Constants.HUMIDITY_MAX}
-                    unit={"%"}
-                />
-                <GaugeData
-                    value={sensorData.map((data) => data?.data.co2)}
-                    min={Constants.CO2_MIN}
-                    max={Constants.CO2_MAX}
-                    unit={"ppm"}
-                />
+            <div className="py-5 flex flex-wrap items-center gap-3 justify-center md:justify-evenly">
+                <div className=" bg-white w-52 flex justify-center pt-6 shadow-md rounded-3xl">
+                    <GaugeData
+                        value={sensorData.map((data) => data?.data.temperature)}
+                        min={Constants.TEMPERATURE_MIN}
+                        max={Constants.TEMPERATURE_MAX}
+                        unit={"°C"}
+                    />
+                </div>
+                <div className=" bg-white w-52 flex justify-center pt-6 shadow-md rounded-3xl">
+                    <GaugeData
+                        value={sensorData.map((data) => data?.data.humidity)}
+                        min={Constants.HUMIDITY_MIN}
+                        max={Constants.HUMIDITY_MAX}
+                        unit={"%"}
+                    />
+                </div>
+                <div className=" bg-white w-52 flex justify-center pt-6 shadow-md rounded-3xl">
+                    <GaugeData
+                        value={sensorData.map((data) => data?.data.co2)}
+                        min={Constants.CO2_MIN}
+                        max={Constants.CO2_MAX}
+                        unit={"ppm"}
+                    />
+                </div>
             </div>
-            <div className="flex flex-col h-[40%] min-w-[72%]">
-                <Line data={dataLine} options={optionsLine} height={300} width={250} />
+            <div className="w-full bg-white rounded-2xl shadow-md mb-4">
+                 <Line data={dataLine} options={optionsLine} height={300} width={250} />
             </div>
             
         </div>

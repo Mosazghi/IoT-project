@@ -12,7 +12,6 @@ void setup() {
   Serial.begin(115200);
   pinMode(motionSensor, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(motionSensor), detectsMovement, RISING);
- 
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
 
@@ -38,21 +37,20 @@ void setup() {
 }
  
 void loop() {
-  // Set values to send
-  currentMillis = millis();
-  esp_err_t result;
 
-  if(currentMillis - prevMillis > 200){
-    //myData.sendingPirSensor = (digitalRead(motionSensor) == HIGH)? true : false;
-    myData.sendingPirSensor = digitalRead(motionSensor);
-    prevMillis = currentMillis;
-      /*PIR-sensor*/
-    // Send message via ESP-NOW
+  esp_err_t result; // Resultatet av sendt datapakke
+  currentMillis = millis();
+
+  if(currentMillis - prevMillis > 200){ // Venter før den leser nye verdier fra sensor
+    myData.sendingPirSensor = digitalRead(motionSensor); // Verdi som skal sendes
+    prevMillis = currentMillis;                          
+
+    // Sender melding via ESP-NOW
     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
     if (result == ESP_OK) {
     Serial.println("Sent with success");
-    // Serial.print("Status:");
-    // Serial.println(myData.sendingPirSensor);
+    Serial.print("Status:");
+    Serial.println(myData.sendingPirSensor);
     }
     else {
       Serial.println("Error sending the data");

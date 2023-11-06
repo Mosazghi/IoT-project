@@ -27,7 +27,6 @@ float co2val = 0;
 //float sensorValues[2];
 float sensorValues[4];
 
-// LED Pin
 void setup() {
   Serial.begin(115200);
   mqttInit();
@@ -47,7 +46,7 @@ void setup() {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);
   }
-  if (! sgp.begin()){
+  if (!sgp.begin()){
     Serial.println("Sensor not found :(");
     while (1);
   }
@@ -73,7 +72,6 @@ void setup() {
 
 
 void loop() {
-
   if (!client.connected()) {
     mqttReconnect();
   }
@@ -84,7 +82,6 @@ void loop() {
     return;
   }
 
-    /* ESP32-NOW */
   currentTime = millis();
   if(incomingPirSensor){
       startTimer = true;
@@ -96,7 +93,6 @@ void loop() {
       motion = true;
     }
   } 
-
   // Slår av LED om tida har passert den innsatte tida
   if(startTimer && (currentTime - lastTrigger > (timeSeconds*1000))) {
     Serial.println("\tIngen bevegelse detektert -> LYS AV...\n");
@@ -114,8 +110,8 @@ void loop() {
     // Serial.print("\t\tFuktighet = ");
     // Serial.print(bme.readHumidity());
     // Serial.println(" %");
-    Serial.print("\t\teCO2-nivå = ");
-    Serial.print(sgp.eCO2);
+    // Serial.print("\t\teCO2-nivå = ");
+    // Serial.print(sgp.eCO2);
     // Serial.print(sgp.eCO2); Serial.println(" ppm");
     // Serial.print("\t\tTrykknivå = ");
     // Serial.print(bme.readPressure() / 100.0F);
@@ -153,7 +149,6 @@ void loop() {
     sensorValues[1] = humidity;
     sensorValues[2] = co2val;
     sensorValues[3] = pressure;
-
-    sendJson(sensorValues, dato, client, "test"); // send to MQTT broker
+    sendJson(sensorValues, dato, client, "sensor"); // sender til MQTT broker
   }
 }

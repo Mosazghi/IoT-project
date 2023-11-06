@@ -29,10 +29,10 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&myData, incomingData, sizeof(myData));
   incomingPirSensor = myData.sendingPirSensor;
   incomingMessage = myData.stateMessage;
-  //Serial.print("Bytes received: ");
-  //Serial.println(len);
-  // Serial.print("Sensor bool: ");
-  // Serial.println(incomingPirSensor);
+  Serial.print("Bytes received: ");
+  Serial.println(len);
+  Serial.print("Sensor bool: ");
+  Serial.println(incomingPirSensor);
 }
  
 void setup() {
@@ -63,8 +63,7 @@ void loop() {
       startTimer = true;
       lastTrigger = millis(); // Starter/restarter timer
       digitalWrite(relayPin, HIGH);
-      delay(500);
-
+      
     if((digitalRead(relayPin) == HIGH) && (motion == false)) {
       Serial.println("\tBevegelse detektert -> LYS PÅ...\n");
       motion = true;

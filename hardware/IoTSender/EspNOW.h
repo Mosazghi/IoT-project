@@ -11,7 +11,7 @@ uint8_t broadcastAddress[] = {0x40, 0xF5, 0x20, 0x70, 0x19, 0x30};
 // Structure example to send data
 // Must match the receiver structure
 typedef struct struct_message {
-  //String stateMessage;
+  String stateMessage;
   bool sendingPirSensor;
 } struct_message;
 

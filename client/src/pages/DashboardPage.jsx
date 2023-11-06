@@ -20,13 +20,13 @@ function DashboardPage() {
     };
 
     return (
-        <>
+        <div className="mx-auto my-0 min-h-screen  px-3">
             <DashboardHeader user={user} toggleSwitch={toggleSensorData} showData={showSensorData}/>
             <h3 className="text-center text-2xl font-bold mb-5">
                 {isAdmin ? "Oversiktlig data" : "Her kan du scanne QR-koden"}
             </h3>
             {isAdmin && showSensorData ? <SensorData /> : <QRData data={user.id} />}
-        </>
+        </div>
     );
 }
 

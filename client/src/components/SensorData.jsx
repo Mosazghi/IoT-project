@@ -7,6 +7,7 @@ import { Constants } from "../utils/constants";
 import { useMqttConnDetails } from "../utils/mqtt/mqttConnDetails";
 import { MQTTService } from "../utils/mqtt/mqttService";
 import GaugeData from "./GaugeData";
+import Test from "./test";
 
 // Konfigurerer ChartJS
 configureCharts();
@@ -76,12 +77,11 @@ const SensorData = () => {
     console.log("dataaaa", sensorData);
 
     return (
-        <div className="grid grid-cols-2 h-screen">
+        <div className="grid-cols-1 grid-rows-3 h-screen">
             <div className="flex flex-col h-[40%] min-w-[72%]">
-                <Line data={dataLine} options={optionsLine} height={300} width={250} />
                 <Bar data={dataBar} options={optionsBar} height={300} width={250} />
             </div>
-            <div className="flex flex-col justify-start">
+            <div className="flex flex-row justify-center">
                 <GaugeData
                     value={sensorData.map((data) => data?.data.temperature)}
                     min={Constants.TEMPERATURE_MIN}
@@ -101,6 +101,10 @@ const SensorData = () => {
                     unit={"ppm"}
                 />
             </div>
+            <div className="flex flex-col h-[40%] min-w-[72%]">
+                <Line data={dataLine} options={optionsLine} height={300} width={250} />
+            </div>
+            
         </div>
     );
 };

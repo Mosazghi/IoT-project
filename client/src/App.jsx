@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import NoPage from "./pages/NoPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import TestPage from "./pages/TestPage";
 
 function App() {
     console.log("App");
@@ -19,6 +20,7 @@ function App() {
                         <Route path="/dashboard" element={<ProtectedRoute />}>
                             <Route path="/dashboard" element={<DashboardPage />} />
                         </Route>
+                        <Route path="/TestPage" element={<TestPage />} />
                         <Route path="*" element={<NoPage />} />
                     </Routes>
                 </Fragment>

@@ -18,8 +18,8 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
     };
 
     return (
-        <div className="flex justify-center mt-6">
-            <header className="transition-all flex flex-row justify-center shadow-lg p-3 items-center mb-5 w-5/6 rounded-3xl">
+        <div className="w-full pt-2">
+            <header className="bg-white transition-all flex flex-row drop-shadow-md  p-3 items-center justify-between mb-5 rounded-3xl  ">
                 <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold">DASHBOARD</h1>
                 <div className="flex justify-items-end gap-2">
                     <div>

@@ -4,12 +4,11 @@ const GaugeData = ({ value, min, max, unit }) => {
     console.log("value", value);
     value = parseFloat(value[value.length - 1]) ? parseFloat(value[value.length - 1]) : min;
     return (
-        <div className="p-5">
             <ReactSpeedometer
                 maxValue={max}
                 minValue={min}
                 height={150}
-                width={200}
+                width={190}
                 value={value}
                 needleTransition="easeQuadIn"
                 needleTransitionDuration={1000}
@@ -19,7 +18,6 @@ const GaugeData = ({ value, min, max, unit }) => {
                 endColor="red"
                 currentValueText={`${value} ${unit}`}
             />
-        </div>
     );
 };
 export default GaugeData;

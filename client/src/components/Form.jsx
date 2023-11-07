@@ -61,6 +61,7 @@ const Form = ({ path }) => {
                             name="username"
                             type="text"
                             onChange={(e) => setUsername(e.target.value)}
+                            required
                         ></input>
 
                         <div>
@@ -73,6 +74,7 @@ const Form = ({ path }) => {
                             name="password"
                             type="password"
                             onChange={(e) => setPassword(e.target.value)}
+                            required
                         ></input>
                     </div>
                     {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}

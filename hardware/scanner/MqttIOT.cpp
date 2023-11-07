@@ -35,6 +35,6 @@ void mqttReconnect() {
 }
 void mqttInit() {
   wifiInit();
-  client.setServer(MQTTSERVER, 1884);
+  client.setServer(MQTTSERVER, 1883);
   client.setCallback(mqttCallback);
 }

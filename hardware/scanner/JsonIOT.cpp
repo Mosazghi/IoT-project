@@ -24,12 +24,12 @@ void sendJson(String data, struct tm time, PubSubClient &client, const char *top
   // Create the JSON document
   StaticJsonDocument<200> doc;
 
-  // // Set the values in the document
-  // char timeBuffer[32];
-  // strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
+  // Set the values in the document
+  char timeBuffer[32];
+  strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
 
   doc["codeData"] = data;
-  doc["timestamp"] = "2023-10-24T09:00";
+  doc["timestamp"] = timeBuffer;
 
   // Serialize JSON document
   char jsonBuffer[512];

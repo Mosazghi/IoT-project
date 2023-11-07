@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <PubSubClient.h>
 
-#define MQTTSERVER "10.24.103.70"
+#define MQTTSERVER "10.24.103.178"
 
 extern PubSubClient client;
 

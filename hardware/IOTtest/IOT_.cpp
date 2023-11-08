@@ -27,6 +27,8 @@ float co2val = 0;
 //float sensorValues[2];
 float sensorValues[4];
 
+int runder = 5;
+
 void setup() {
   Serial.begin(115200);
   mqttInit();
@@ -101,23 +103,6 @@ void loop() {
     digitalWrite(relayPin, LOW);
   }
 
-    // /*Serial monitor*/
-    // Serial.println("------------------------------------------------------------");
-    // Serial.println("\tROOM 100: ");
-    // Serial.print("\t\tTemperatur = ");
-    // Serial.print(bme.readTemperature());
-    // Serial.println("°C");
-    // Serial.print("\t\tFuktighet = ");
-    // Serial.print(bme.readHumidity());
-    // Serial.println(" %");
-    // Serial.print("\t\teCO2-nivå = ");
-    // Serial.print(sgp.eCO2);
-    // Serial.print(sgp.eCO2); Serial.println(" ppm");
-    // Serial.print("\t\tTrykknivå = ");
-    // Serial.print(bme.readPressure() / 100.0F);
-    // Serial.println(" hPa");
-    // Serial.println("------------------------------------------------------------");
-
       /* OLED-skjermvisning basert på tidsintervall */
   if (currentTime - prevMillis >= (interval * 1000)) {
     prevMillis = currentTime;
@@ -145,15 +130,39 @@ void loop() {
     humidity = bme.readHumidity();
     co2val = sgp.eCO2;
     pressure = bme.readPressure();
-    sensorValues[0] = temperature;
-    sensorValues[1] = humidity;
-    sensorValues[2] = co2val;
-    sensorValues[3] = pressure;
-<<<<<<< HEAD
-    
-    sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
-=======
-    sendJson(sensorValues, dato, client, "sensor"); // sender til MQTT broker
->>>>>>> Diddy
+
+    if(runder == 5) {
+      sensorValues[0] /= 5;
+      sensorValues[1] /= 5;
+      sensorValues[2] /= 5;
+      sensorValues[3] /= 5;
+      runder = 0;
+
+      /*Serial monitor*/
+      Serial.println("------------------------------------------------------------");
+      Serial.println("\tROOM 100: ");
+      Serial.print("\t\tTemperatur = ");
+      Serial.print(bme.readTemperature());
+      Serial.println("°C");
+      Serial.print("\t\tFuktighet = ");
+      Serial.print(bme.readHumidity());
+      Serial.println(" %");
+      Serial.print("\t\teCO2-nivå = ");
+      Serial.print(sgp.eCO2);
+      Serial.print(sgp.eCO2); Serial.println(" ppm");
+      Serial.print("\t\tTrykknivå = ");
+      Serial.print(bme.readPressure() / 100.0F);
+      Serial.println(" hPa");
+      Serial.println("------------------------------------------------------------");
+      
+      sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
+    }
+      
+    runder++;
+    sensorValues[0] += temperature;
+    sensorValues[1] += humidity;
+    sensorValues[2] += co2val;
+    sensorValues[3] += pressure;
+
   }
 }

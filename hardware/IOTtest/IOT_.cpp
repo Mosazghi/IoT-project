@@ -149,7 +149,11 @@ void loop() {
     sensorValues[1] = humidity;
     sensorValues[2] = co2val;
     sensorValues[3] = pressure;
+<<<<<<< HEAD
     
     sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
+=======
+    sendJson(sensorValues, dato, client, "sensor"); // sender til MQTT broker
+>>>>>>> Diddy
   }
 }

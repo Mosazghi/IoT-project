@@ -3,7 +3,7 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
-#define ledPin 26
+#define relayPin 18
 #define timeSeconds 5
 
 // Structure example to receive data
@@ -31,16 +31,16 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   incomingMessage = myData.stateMessage;
   Serial.print("Bytes received: ");
   Serial.println(len);
-  // Serial.print("Sensor bool: ");
-  // Serial.println(incomingPirSensor);
+  Serial.print("Sensor bool: ");
+  Serial.println(incomingPirSensor);
 }
  
 void setup() {
   // Initialize Serial Monitor
   Serial.begin(115200);
 
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW);
   
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
@@ -62,9 +62,9 @@ void loop() {
   if(incomingPirSensor){
       startTimer = true;
       lastTrigger = millis(); // Starter/restarter timer
-    digitalWrite(ledPin, HIGH);
-
-    if((digitalRead(ledPin) == HIGH) && (motion == false)) {
+      digitalWrite(relayPin, HIGH);
+      
+    if((digitalRead(relayPin) == HIGH) && (motion == false)) {
       Serial.println("\tBevegelse detektert -> LYS PÅ...\n");
       motion = true;
     }
@@ -75,6 +75,6 @@ void loop() {
     Serial.println("\tIngen bevegelse detektert -> LYS AV...\n");
     startTimer = false;
     motion = false;
-    digitalWrite(ledPin, LOW);
+    digitalWrite(relayPin, LOW);
   }
 }

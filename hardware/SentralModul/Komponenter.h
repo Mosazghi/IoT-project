@@ -3,8 +3,8 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include "Adafruit_SGP30.h"
-#include <Wire.h>
-#define relayPin 18
+
+#define ledPin 18
 #define timeSeconds 5
 // OLED-skjerm og sensorer
 #define SCREEN_WIDTH 128 // OLED display width, in pixels

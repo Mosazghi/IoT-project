@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/fest1/OneDrive/Alt/Skrivebord/IoT-project/hardware/scanner",
-      "program": "c:/Users/fest1/OneDrive/Alt/Skrivebord/IoT-project/hardware/scanner/build/Debug/outDebug",
+      "cwd": "c:/Users/fest1/OneDrive/Alt/Skrivebord/IoT-project/hardware/IOTtest",
+      "program": "c:/Users/fest1/OneDrive/Alt/Skrivebord/IoT-project/hardware/IOTtest/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

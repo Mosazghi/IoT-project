@@ -5,12 +5,14 @@
 #include <Arduino.h>
 #include <PubSubClient.h>
 
-#define MQTTSERVER "10.24.103.178"
+#define MQTTSERVER "10.24.103.70"
 
 extern PubSubClient client;
 
-void mqttInit();
-void mqttCallback(char *topic, byte *message, unsigned int length);
-void mqttReconnect();
+namespace MQTT {
+  void mqttInit();
+  void mqttCallback(char *topic, byte *message, unsigned int length);
+  void mqttReconnect();
+}
 
 #endif

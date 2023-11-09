@@ -87,6 +87,6 @@ void OLED::displayInIntervals() {
       OLED::displayPressure();
       state++;
   }
-  
+
   display.display();
 }

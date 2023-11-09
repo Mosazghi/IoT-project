@@ -21,3 +21,10 @@ void SENSOR::initSensor() {
     
     sgp.setIAQBaseline(0x8F25, 0x86C0); // Kalibreringsverdier (hentet fra eksempel)
 }
+
+void SENSOR::checkMeasurement() {
+    if (!sgp.IAQmeasure()) {
+        Serial.println("Measurement failed");
+        return;
+    }
+}

@@ -10,5 +10,7 @@ extern Adafruit_SGP30 sgp;
 
 namespace SENSOR {
     void initSensor();
+    void checkMeasurement();
 }
+
 #endif

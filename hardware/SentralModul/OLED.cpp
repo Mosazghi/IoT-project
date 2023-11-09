@@ -1,6 +1,7 @@
 #include "OLED.h"
 
 extern Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+int state = BME280_STATE;
 
 /**
 *   Viser temperatur på OLED-skjermen.
@@ -70,4 +71,22 @@ void OLED::initDisplay() {
 
   display.clearDisplay();
   display.setTextColor(WHITE);
+}
+
+void OLED::displayInIntervals() {
+  display.clearDisplay();
+
+  if (state == BME280_STATE) {
+      OLED::displayTemp();
+      OLED::displayHumid();
+      state--;
+  }
+  
+  if (state == SG90_STATE) {
+      OLED::displayCO2();
+      OLED::displayPressure();
+      state++;
+  }
+  
+  display.display();
 }

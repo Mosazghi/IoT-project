@@ -27,14 +27,13 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     dtostrf(data[2], 1, 2, co2valString);  
     dtostrf(data[3], 1, 2, pressureString); 
     
-      /*Serial print*/
-    // Serial.println(temperatureString);
-    // Serial.print("Humidity: ");
-    // Serial.println(humidityString);
-    // Serial.print("CO2-level: ");
-    // Serial.println(co2valString);
-    // Serial.print("Pressure: ");   
-    // Serial.println(pressureString);
+    Serial.println(temperatureString);
+    Serial.print("Humidity: ");
+    Serial.println(humidityString);
+    Serial.print("CO2-level: ");
+    Serial.println(co2valString);
+    Serial.print("Pressure: ");   
+    Serial.println(pressureString);
 
     // Create the JSON document
     StaticJsonDocument<200> doc;
@@ -57,8 +56,8 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     serializeJson(doc, jsonBuffer);
 
     // Print the JSON document
-    // Serial.println(jsonBuffer);
-    // Serial.println();
+    Serial.println(jsonBuffer);
+    Serial.println();
 
     client.publish(topic, jsonBuffer);
 }

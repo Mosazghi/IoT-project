@@ -44,6 +44,7 @@ const Form = ({ path }) => {
             });
     };
 
+    // Returnerer en form som enten viser login eller register
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
             <div className="flex">
@@ -56,11 +57,11 @@ const Form = ({ path }) => {
                                         <h1 className="font-bold text-7xl text-shadow-sm text-cyan-500"> {checkMark ? "SIGN UP" : "LOGIN"}</h1>
                                     </div>
                                 </div>
-                                <div>
+                                <div> 
                                     <p className="text-black mt-10">Username</p>
                                 </div>
-                                <input
-                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner pl-2 mt-2"
+                                <input 
+                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner pl-2 mt-2" //input feltet for brukernavn
                                     value={username}
                                     name="username"
                                     type="text"
@@ -73,7 +74,7 @@ const Form = ({ path }) => {
                                     <p className="text-black mt-3">Password</p>
                                 </div>
                                 <input
-                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner  pl-2 mt-2"
+                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner  pl-2 mt-2" //input feltet for passord
                                     value={password}
                                     name="password"
                                     type="password"
@@ -83,8 +84,8 @@ const Form = ({ path }) => {
                             </div>
                         </div>
                         
-                        <div className="mt-2 flex items-center gap-3 justify-center">
-                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}
+                        <div className="mt-2 flex items-center gap-3 justify-center"> // knappene for å logge inn og registrere seg
+                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />} // registrer admin eller ansatt
                             <button className="< bg-cyan-500 shadow-lg shadow-cyan-500/50 hover:bg-cyan-400 text-white w-20 h-10 rounded-2xl ">
                                 {checkMark ? "REGISTER" : "LOGIN"}
                             </button>
@@ -93,7 +94,7 @@ const Form = ({ path }) => {
                             </Link>
                         </div>
 
-                        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+                        {error && <p className="text-red-500 text-center mt-2">{error}</p>} // viser feilmelding
                        </div>
                     </div>
             </div>

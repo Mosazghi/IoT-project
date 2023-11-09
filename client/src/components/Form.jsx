@@ -53,7 +53,7 @@ const Form = ({ path }) => {
                             <div className="grid row-2 flex justify-center">
                                 <div className="flex justify-center">
                                     <div className="absolute -top-12">
-                                        <h1 className="font-bold text-7xl text-shadow-lg text-cyan-500"> {checkMark ? "SIGN UP" : "LOGIN"}</h1>
+                                        <h1 className="font-bold text-7xl text-shadow-sm text-cyan-500"> {checkMark ? "SIGN UP" : "LOGIN"}</h1>
                                     </div>
                                 </div>
                                 <div>
@@ -65,6 +65,7 @@ const Form = ({ path }) => {
                                     name="username"
                                     type="text"
                                     onChange={(e) => setUsername(e.target.value)}
+                                    required
                                 ></input>
                             </div>
                             <div className="grid row-2 flex justify-center">
@@ -77,12 +78,13 @@ const Form = ({ path }) => {
                                     name="password"
                                     type="password"
                                     onChange={(e) => setPassword(e.target.value)}
+                                    required
                                 ></input>
                             </div>
                         </div>
-<<<<<<< HEAD
-                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}
+                        
                         <div className="mt-2 flex items-center gap-3 justify-center">
+                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}
                             <button className="< bg-cyan-500 shadow-lg shadow-cyan-500/50 hover:bg-cyan-400 text-white w-20 h-10 rounded-2xl ">
                                 {checkMark ? "REGISTER" : "LOGIN"}
                             </button>
@@ -92,33 +94,7 @@ const Form = ({ path }) => {
                         </div>
 
                         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
-=======
-                        <div>
-                            <p className="text-black mt-10">Username</p>
-                        </div>
-                        <input
-                            className="border-2 w-96 h-10 rounded-2xl shadow-inner pl-2 mt-2"
-                            value={username}
-                            name="username"
-                            type="text"
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        ></input>
-
-                        <div>
-                            <p className="text-black mt-3">Password</p>
-                        </div>
-
-                        <input
-                            className="border-2 w-96 h-10 rounded-2xl shadow-inner  pl-2 mt-2"
-                            value={password}
-                            name="password"
-                            type="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        ></input>
->>>>>>> d731ecb79b95c4df9d146134e33ddf300823a344
-                    </div>
+                       </div>
                     </div>
             </div>
         </form>

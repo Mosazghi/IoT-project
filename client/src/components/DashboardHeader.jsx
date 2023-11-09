@@ -26,7 +26,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                     { user.admin && (
                             <button
                             onClick={handleShowUser}
-                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500      rounded-full grid justify-items-center content-center"
+                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                             > {/* Change the icon based on the state */}
                             {showData? <FaQrcode className="text-2xl text-white"/> : <FaDatabase className="text-2xl text-white"/>}
                             </button>
@@ -36,7 +36,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                         <button
                             onClick={() => setShowUser(!showUser)}
                             onTouchMove={() => setShowUser(!showUser)}
-                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500      rounded-full grid justify-items-center content-center"
+                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500      rounded-full grid justify-items-center content-center"
                         >
                             <FaUserLarge className="text-2xl text-white" />
                         </button>
@@ -45,7 +45,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                     <div>
                         <button
                             onClick={handleLogout}
-                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
+                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
                             <FaPowerOff className="text-2xl text-white" />
                         </button>

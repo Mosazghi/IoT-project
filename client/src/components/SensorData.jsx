@@ -90,12 +90,12 @@ const SensorData = () => {
 
     return (
         <div className="grid-cols-1 grid-rows-3 h-screen">
-            // søylediagrammet
+            {/* // søylediagrammet */}
             <div className="w-full bg-white rounded-2xl shadow-md">
                 <Bar data={dataBar} options={optionsBar} height={300} width={250} />
             </div>
             <div className="py-5 flex flex-wrap items-center gap-3 justify-center md:justify-evenly">
-                // gauge diagrammene temperature, humidity og co2
+                {/* // gauge diagrammene temperature, humidity og co2 */}
                 <div className=" bg-white w-52 flex justify-center pt-6 shadow-md rounded-3xl">
                     <ReactSpeedometer
                         maxValue={0}
@@ -137,7 +137,7 @@ const SensorData = () => {
                     />
                 </div>
             </div>
-            // linje diagrammet for temperaturen
+             {/* linje diagrammet for temperaturen */}
             <div className="w-full bg-white rounded-2xl shadow-md mb-4">
                 <Line data={dataLine} options={optionsLine} height={300} width={250} />
             </div>

@@ -3,6 +3,8 @@ import { FaDatabase, FaDiagramNext, FaDiagramSuccessor, FaPowerOff, FaQrcode, Fa
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
 
+{/* Kode for header, øverste boksen på dashboard page*/}
+
 const DashboardHeader = ({ user, toggleSwitch, showData }) => {
     const [showUser, setShowUser] = useState(false);
     const navigate = useNavigate();
@@ -25,24 +27,21 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                 </h1>
 
                 <div className="flex justify-items-end gap-2">
+                    {/* Iconer top jøyre */}
                     <div>
-                        {user.admin && (
-                            <button
-                                onClick={handleShowUser}
-                                className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
-                            >
-                                {showData ? (
-                                    <FaQrcode className="text-2xl text-white" />
-                                ) : (
-                                    <FaDatabase className="text-2xl text-white" />
-                                )}
+                    { user.admin && (
+                            <button 
+                            onClick={handleShowUser} //knappen som endrer mellom QR og data
+                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
+                            > {/* Change the icon based on the state */}
+                            {showData? <FaQrcode className="text-2xl text-white"/> : <FaDatabase className="text-2xl text-white"/>}
                             </button>
                         )}
                     </div>
                     <div className="flex justify-center items-center flex-col">
                         <button
-                            onClick={() => setShowUser(!showUser)}
-                            onTouchMove={() => setShowUser(!showUser)}
+                            onClick={() => setShowUser(!showUser)} //knappen som viser bruker navn
+                            onTouchMove={() => setShowUser(!showUser)} 
                             className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
                             <FaUserLarge className="text-2xl text-white" />
@@ -51,7 +50,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                     </div>
                     <div>
                         <button
-                            onClick={handleLogout}
+                            onClick={handleLogout} //knappen som logger ut blir send til login
                             className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
                             <FaPowerOff className="text-2xl text-white" />

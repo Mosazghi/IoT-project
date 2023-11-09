@@ -45,6 +45,8 @@ const Test = () => {
           id='admin'
           name='admin'
           className='w-20 h-18 peer hidden'
+          checked={isAdmin}
+          onChange={(e) => setAdmin(e.target.checked)}
           >
           </input>
           <label

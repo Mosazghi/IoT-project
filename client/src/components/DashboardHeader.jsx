@@ -13,30 +13,37 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
         navigate("/");
     };
 
-    const handleShowUser = () => { 
+    const handleShowUser = () => {
         toggleSwitch();
     };
 
     return (
         <div className="w-full pt-2">
             <header className="bg-white transition-all flex flex-row drop-shadow-md  p-3 justify-between items-start mb-5 rounded-3xl  ">
-                <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold ">{user.admin ? "ADMIN DASHBOARD" : "DASHBOARD"}</h1>
+                <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold ">
+                    {user.admin ? "ADMIN DASHBOARD" : "DASHBOARD"}
+                </h1>
+
                 <div className="flex justify-items-end gap-2">
                     <div>
-                    { user.admin && (
+                        {user.admin && (
                             <button
-                            onClick={handleShowUser}
-                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
-                            > {/* Change the icon based on the state */}
-                            {showData? <FaQrcode className="text-2xl text-white"/> : <FaDatabase className="text-2xl text-white"/>}
+                                onClick={handleShowUser}
+                                className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
+                            >
+                                {showData ? (
+                                    <FaQrcode className="text-2xl text-white" />
+                                ) : (
+                                    <FaDatabase className="text-2xl text-white" />
+                                )}
                             </button>
-                    )}
+                        )}
                     </div>
                     <div className="flex justify-center flex-col">
                         <button
                             onClick={() => setShowUser(!showUser)}
                             onTouchMove={() => setShowUser(!showUser)}
-                            className="w-12 h-12 bg-slate-200 shadow-inner self-center hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
+                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
                             <FaUserLarge className="text-2xl text-white" />
                         </button>
@@ -45,7 +52,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                     <div>
                         <button
                             onClick={handleLogout}
-                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full grid justify-items-center content-center"
+                            className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
                             <FaPowerOff className="text-2xl text-white" />
                         </button>

@@ -7,4 +7,7 @@ export const Constants = {
 
     CO2_MAX: 1000,
     CO2_MIN: 0,
+
+    PRESSURE_MAX: 1000,
+    PRESSURE_MIN: 0,
 };

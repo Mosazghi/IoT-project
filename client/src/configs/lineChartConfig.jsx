@@ -9,6 +9,7 @@ const lineChartConfig = (sensorData) => {
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.1,
+                pointRadius: 10,
             },
         ],
     };
@@ -23,7 +24,7 @@ const lineChartConfig = (sensorData) => {
                 ticks: {
                     display: true,
                     font: {
-                        size: 20,
+                        size: 22,
                     },
                 },
             },
@@ -37,7 +38,7 @@ const lineChartConfig = (sensorData) => {
                 ticks: {
                     display: true,
                     font: {
-                        size: 16, // Change this value to make the x-axis labels larger or smaller
+                        size: 20, // Change this value to make the x-axis labels larger or smaller
                     },
                 },
             },
@@ -50,7 +51,19 @@ const lineChartConfig = (sensorData) => {
                 display: true,
                 text: "Nåværende strømforbruk [kWh]",
                 font: {
-                    size: 22,
+                    size: 30,
+                    weight: "bold",
+                },
+            },
+            tooltip: {
+                caretSize: 18,
+                boxWidth: 18,
+                titleFont: {
+                    size: 18,
+                    weight: "bold",
+                },
+                bodyFont: {
+                    size: 18,
                     weight: "bold",
                 },
             },

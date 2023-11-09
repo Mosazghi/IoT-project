@@ -26,12 +26,18 @@ const barChartConfig = (statsData) => {
                 time: {
                     unit: "day",
                 },
+                ticks: {
+                    display: true,
+                    font: {
+                        size: 22,
+                    },
+                },
             },
             y: {
                 ticks: {
                     display: false,
                     font: {
-                        size: 14, // Change this value to make the x-axis labels larger or smaller
+                        size: 23, // Change this value to make the x-axis labels larger or smaller
                     },
                 },
             },
@@ -41,7 +47,7 @@ const barChartConfig = (statsData) => {
                 display: true,
                 text: "Daglig statistikk - sammenheng mellom ansatte og strømforbruk [kWh]",
                 font: {
-                    size: 22,
+                    size: 27,
                     weight: "bold",
                 },
             },
@@ -49,7 +55,7 @@ const barChartConfig = (statsData) => {
                 align: "end",
                 anchor: "end",
                 font: {
-                    size: 22,
+                    size: 26,
                     weight: "bold",
                 },
             },

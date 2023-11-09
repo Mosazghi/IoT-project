@@ -39,7 +39,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                             </button>
                         )}
                     </div>
-                    <div className="flex justify-center flex-col">
+                    <div className="flex justify-center items-center flex-col">
                         <button
                             onClick={() => setShowUser(!showUser)}
                             onTouchMove={() => setShowUser(!showUser)}

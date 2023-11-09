@@ -44,49 +44,59 @@ const Form = ({ path }) => {
             });
     };
 
+    // Returnerer en form som enten viser login eller register
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="m-auto">
-                <div>
-                    <div className="flex justify-center">
-                        <p className="font-bold text-5xl"> {checkMark ? "SIGN UP" : "LOGIN"}</p>
-                    </div>
-                    <div>
-                        <p className="text-black mt-10">Username</p>
-                    </div>
-                    <input
-                        className="border-2 w-80 h-10 rounded-2xl shadow-inner pl-2 mt-2"
-                        value={username}
-                        name="username"
-                        type="text"
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    ></input>
+            <div className="flex">
+                <div className="m-auto">
+                    <div className=" bg-white w-96 h-80 rounded-3xl shadow-md relative ">
+                        <div className="flex grid row-auto">
+                            <div className="grid row-2 flex justify-center">
+                                <div className="flex justify-center">
+                                    <div className="absolute -top-12">
+                                        <h1 className="font-bold text-7xl text-shadow-sm text-cyan-500"> {checkMark ? "SIGN UP" : "LOGIN"}</h1>
+                                    </div>
+                                </div>
+                                <div> 
+                                    <p className="text-black mt-10">Username</p>
+                                </div>
+                                <input 
+                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner pl-2 mt-2" //input feltet for brukernavn
+                                    value={username}
+                                    name="username"
+                                    type="text"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                ></input>
+                            </div>
+                            <div className="grid row-2 flex justify-center">
+                                <div>
+                                    <p className="text-black mt-3">Password</p>
+                                </div>
+                                <input
+                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner  pl-2 mt-2" //input feltet for passord
+                                    value={password}
+                                    name="password"
+                                    type="password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                ></input>
+                            </div>
+                        </div>
+                        
+                        <div className="mt-2 flex items-center gap-3 justify-center"> // knappene for å logge inn og registrere seg
+                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />} // registrer admin eller ansatt
+                            <button className="< bg-cyan-500 shadow-lg shadow-cyan-500/50 hover:bg-cyan-400 text-white w-20 h-10 rounded-2xl ">
+                                {checkMark ? "REGISTER" : "LOGIN"}
+                            </button>
+                            <Link to={path === "login" ? "/register" : "/"} className="underline">
+                                {path === "login" ? "New user?" : "Already a user?"}
+                            </Link>
+                        </div>
 
-                    <div>
-                        <p className="text-black mt-3">Password</p>
+                        {error && <p className="text-red-500 text-center mt-2">{error}</p>} // viser feilmelding
+                       </div>
                     </div>
-
-                    <input
-                        className="border-2 w-80 h-10 rounded-2xl shadow-inner  pl-2 mt-2"
-                        value={password}
-                        name="password"
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />}
-                <div className="mt-2 flex items-center gap-3 justify-center">
-                    <button className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white w-20 h-10 rounded-3xl  shadow-lg shadow-orange-300/50">
-                        {checkMark ? "REGISTER" : "LOGIN"}
-                    </button>
-                    <Link to={path === "login" ? "/register" : "/"} className="underline">
-                        {path === "login" ? "New user?" : "Already an user?"}
-                    </Link>
-                </div>
-
-                {error && <p className="text-red-500 text-center mt-2">{error}</p>}
             </div>
         </form>
     );

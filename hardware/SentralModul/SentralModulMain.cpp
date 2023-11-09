@@ -8,19 +8,26 @@
 
 // Biblioteker
 #include <Arduino.h>
-#include "MqttIOT.h"
 #include "JsonIOT.h"
 #include "time.h"
-#include "Esp32Mottaker.h"
-#include "Komponenter.h"
+#include "EspNow.h"
+#include "OLED.h"
+#include "const.h"
+
+/* Skjerm tidsintervall */
+unsigned long prevTime = 0;
+unsigned long currentTime = 0;
+unsigned long lastTrigger = 0;
 
 long lastMsg = 0; 
-const int INTERVAL = 5000; // 5 sekunders interval for sensoravlesning og sending 
+bool startTimer = false;
+bool motion = false;
+
+
+int currentState = BME280_STATE;  // Start med å vise temperatur og fuktighet
+
 
 // Dato konfigurasjon 
-const char* ntp = "pool.ntp.org";
-const long gmtOffset_sec = 7200;
-const int daylightOffset_sec = 0;
 struct tm dato;
 
 // Sensor målinger
@@ -35,50 +42,22 @@ int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
 
 void setup() {
   Serial.begin(115200);
-  mqttInit();
-  configTime(gmtOffset_sec, daylightOffset_sec, ntp);
 
-  // Set device as a Wi-Fi Station
-  WiFi.mode(WIFI_STA);
-  pinMode(relayPin, OUTPUT);
-  digitalWrite(relayPin, LOW);
+  MQTT::mqttInit();
+  OLED::initDisplay();
+  ESPNOW::initEspNow();
   
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
-    Serial.println(F("SSD1306 allocation failed"));
-    for(;;);
-  }
-  if (!bme.begin(0x76)) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring!");
-    while (1);
-  }
-  if (!sgp.begin()){
-    Serial.println("Sensor not found :(");
-    while (1);
-  }
-  if (!sgp.IAQinit()) {
-    Serial.println("SGP30 initialization failed");
-    while (1);
-  }
-    // Init ESP-NOW
-  if (esp_now_init() != ESP_OK) {
-    Serial.println("Error initializing ESP-NOW");
-    return;
-  }
-
-  sgp.setIAQBaseline(0x8F25, 0x86C0); // Kalibreringsverdier (hentet fra eksempel)
+  configTime(gmtOffset_sec, daylightOffset_sec, ntp);
+  WiFi.mode(WIFI_STA);
+  
   pinMode(relayPin, OUTPUT);
   digitalWrite(relayPin, LOW);
-  display.clearDisplay();
-  display.setTextColor(WHITE);
-  // Once ESPNow is successfully Init, we will register for recv CB to
-  // get recv packer info
-  esp_now_register_recv_cb(OnDataRecv);
 }
 
 
 void loop() {
   if (!client.connected()) {
-    mqttReconnect();
+    MQTT::mqttReconnect();
   }
   client.loop();
 
@@ -107,17 +86,17 @@ void loop() {
   }
 
       /* OLED-skjermvisning basert på tidsintervall */
-  if (currentTime - prevMillis >= (interval * 1000)) {
-    prevMillis = currentTime;
+  if (currentTime - prevTime >= (interval * 1000)) {
+   prevTime = currentTime;
 
     display.clearDisplay();
 
     if (currentState == BME280_STATE) {
-        displayTemp();
-        displayHumid();
+        OLED::displayTemp();
+        OLED::displayHumid();
     } else if (currentState == SG90_STATE) {
-        displayCO2();
-        displayPressure();
+        OLED::displayCO2();
+        OLED::displayPressure();
     }
     display.display();
     // Bytt til neste tilstand

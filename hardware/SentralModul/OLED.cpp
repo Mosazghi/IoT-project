@@ -1,35 +1,11 @@
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BME280.h>
-#include "Adafruit_SGP30.h"
+#include "OLED.h"
 
-#define ledPin 18
-#define timeSeconds 5
-// OLED-skjerm og sensorer
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
-Adafruit_BME280 bme;
-Adafruit_SGP30 sgp;
+extern Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-
-// PIR-Sensor
-const long interval = 3;
-unsigned long prevMillis = 0;
-unsigned long currentMillis = 0;
-const int BME280_STATE = 1;
-const int SG90_STATE = 2;
-
-unsigned long currentTime = 0;
-unsigned long lastTrigger = 0;
-bool startTimer = false;
-bool motion = false;
-
-int currentState = BME280_STATE;  // Start med å vise temperatur og fuktighet
-
-
-void displayTemp(){
+/**
+*   Viser temperatur på OLED-skjermen.
+*/
+void OLED::displayTemp(){
   display.setTextSize(1);
   display.setCursor(0,0);
   display.print("Temperatur: ");
@@ -44,8 +20,10 @@ void displayTemp(){
   display.print("C");
 }
 
-void displayHumid(){
-  // display fuktighet
+/**
+*   Viser fuktighet på OLED-skjermen.
+*/
+void OLED::displayHumid(){
   display.setTextSize(1);
   display.setCursor(0, 35);
   display.print("Fuktighet: ");
@@ -56,8 +34,10 @@ void displayHumid(){
   display.display();
 }
 
-void displayCO2(){
-  // display CO2-nivå
+/**
+*   Viser CO2-nivå på OLED-skjermen.
+*/
+void OLED::displayCO2(){
   display.setTextSize(1);
   display.setCursor(0, 0);
   display.print("CO2-nivaa: ");
@@ -68,8 +48,10 @@ void displayCO2(){
   display.display();
 }
 
-void displayPressure(){
-    // display trykknivå
+/**
+*   Viser trykknivå på OLED-skjermen.
+*/
+void OLED::displayPressure(){
   display.setTextSize(1);
   display.setCursor(0, 35);
   display.print("Trykknivaa: ");
@@ -78,4 +60,14 @@ void displayPressure(){
   display.print(String(int(bme.readPressure())));
   display.print(" hPa"); 
   display.display();
+}
+
+void OLED::initDisplay() {
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
+  Serial.println(F("SSD1306 allocation failed"));
+  for(;;);
+  }
+
+  display.clearDisplay();
+  display.setTextColor(WHITE);
 }

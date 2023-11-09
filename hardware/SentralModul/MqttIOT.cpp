@@ -2,13 +2,12 @@
 
 PubSubClient client(espClient);
 
-
-void mqttCallback(char* topic, byte* message, unsigned int length) {
+void MQTT::mqttCallback(char *topic, byte *message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
   Serial.print(". Message: ");
   String messageTemp;
-  
+
   for (int i = 0; i < length; i++) {
     Serial.print((char)message[i]);
     messageTemp += (char)message[i];
@@ -16,7 +15,7 @@ void mqttCallback(char* topic, byte* message, unsigned int length) {
   Serial.println();
 }
 
-void mqttReconnect() {
+void MQTT::mqttReconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
@@ -34,7 +33,7 @@ void mqttReconnect() {
     }
   }
 }
-void mqttInit() {
+void MQTT::mqttInit() {
   wifiInit();
   client.setServer(MQTTSERVER, 1883);
   client.setCallback(mqttCallback);

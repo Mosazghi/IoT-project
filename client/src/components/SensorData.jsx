@@ -18,17 +18,17 @@ const SensorData = () => {
     const [sensorData, setSensorData] = useState([]);
     const [statsData, setStatsData] = useState([]);
 
-    // Henter ut MQTT-tilkoblingsdetaljer fra serveren (MQTT-server, topic1 og topic2)
+    // Henter ut MQTT-tilkoblingsdetaljer fra serveren (MQTT-server, topic1 og topic2){/* */}
     const connDetails = useMqttConnDetails();
 
-    // Konfigurerer linje- og søylediagrammet
+    // Konfigurerer linje- og søylediagrammet{/* */}
     const { dataLine, optionsLine } = lineChartConfig(sensorData);
     const { dataBar, optionsBar } = barChartConfig(statsData);
 
     useEffect(() => {
         let mqttService;
 
-        // Hvis MQTT-tilkoblingsdetaljer er hentet fra serveren, opprett en MQTT-tilkobling
+        // Hvis MQTT-tilkoblingsdetaljer er hentet fra serveren, opprett en MQTT-tilkobling{/* */}
         if (connDetails) {
             const { mqttServer, mqttTopic1, mqttTopic2 } = connDetails;
 
@@ -36,12 +36,12 @@ const SensorData = () => {
                 console.log(`MQTT tilkoblet! :: ${message}`);
             };
 
-            // Når en melding mottas, legg den til i listen over meldinger (sensorData eller statsData)
+            // Når en melding mottas, legg den til i listen over meldinger (sensorData eller statsData){/* */}
             const onMessage = (topic, message) => {
                 const messageResponse = JSON.parse(message.toString());
                 console.log(`MQTT melding mottatt :: `, messageResponse, topic);
 
-                // Legg til i motatt data basert på topic - statistikk eller sensordata
+                // Legg til i motatt data basert på topic - statistikk eller sensordata{/* */}
                 if (topic === mqttTopic1) setSensorData((prevMessages) => [...prevMessages, messageResponse]);
                 if (topic === mqttTopic2) setStatsData(messageResponse);
             };
@@ -58,7 +58,7 @@ const SensorData = () => {
 
             const fnCallbacks = { onConnect, onMessage, onError, onClose };
             mqttService = new MQTTService(mqttServer, fnCallbacks);
-            // Starter tilkoblingen til MQTT-serveren og abonnerer på topic1 og topic2
+            // Starter tilkoblingen til MQTT-serveren og abonnerer på topic1 og topic2{/* */}
             mqttService.connect();
             mqttService.subscribe(mqttTopic1);
             mqttService.subscribe(mqttTopic2);
@@ -78,12 +78,12 @@ const SensorData = () => {
 
     return (
         <div className="grid-cols-1 grid-rows-3 h-screen">
-            // søylediagrammet
+            // søylediagrammet{/* */}
             <div className="w-full bg-white rounded-2xl shadow-md">
                  <Bar data={dataBar} options={optionsBar} height={300} width={250} />
             </div>
             <div className="py-5 flex flex-wrap items-center gap-3 justify-center md:justify-evenly">
-                // gauge diagrammene temperature, humidity og co2
+                {/* gauge diagrammene temperature, humidity og co2 */}
                 <div className=" bg-white w-52 flex justify-center pt-6 shadow-md rounded-3xl">
                     <GaugeData
                         value={sensorData.map((data) => data?.data.temperature)}
@@ -109,7 +109,7 @@ const SensorData = () => {
                     />
                 </div>
             </div>
-            // linje diagrammet for temperaturen
+            {/* linje diagrammet for temperaturen */}
             <div className="w-full bg-white rounded-2xl shadow-md mb-4">
                  <Line data={dataLine} options={optionsLine} height={300} width={250} />
             </div>

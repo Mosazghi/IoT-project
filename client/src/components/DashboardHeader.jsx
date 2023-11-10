@@ -9,7 +9,8 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
     const [showUser, setShowUser] = useState(false);
     const navigate = useNavigate();
 
-    // Funksjon for å logge ut brukeren
+    {/*Funksjon for å logge ut brukeren */}
+
     const handleLogout = () => {
         cookies.remove("TOKEN", { path: "/" });
         navigate("/");
@@ -23,13 +24,14 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
         <div className="w-full pt-2">
             {/* Header boks */}
             <header className="bg-white transition-all flex flex-row drop-shadow-md  p-3 justify-between items-start items-center mb-5 rounded-3xl  ">
-                <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold ">DASHBOARD</h1> // Overskrift
+                <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold ">DASHBOARD</h1>{/*Overskrift*/}
                 <div className="flex justify-items-end gap-2">
                     {/* Iconer top jøyre */}
                     <div>
+
                     { user.admin && (
                             <button 
-                            onClick={handleShowUser} //knappen som endrer mellom QR og data
+                            onClick={handleShowUser} 
                             className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                             > {/* Change the icon based on the state */}
                             {showData? <FaQrcode className="text-2xl text-white"/> : <FaDatabase className="text-2xl text-white"/>}
@@ -38,7 +40,7 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                     </div>
                     <div className="flex justify-center flex-col">
                         <button
-                            onClick={() => setShowUser(!showUser)} //knappen som viser bruker navn
+                            onClick={() => setShowUser(!showUser)}
                             onTouchMove={() => setShowUser(!showUser)} 
                             className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
@@ -47,8 +49,9 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                         {showUser ? <h4 className="text-center">{user.name}</h4> : null}
                     </div>
                     <div>
+                         {/*knappen som logger ut blir send til login */}
                         <button
-                            onClick={handleLogout} //knappen som logger ut blir send til login
+                            onClick={handleLogout}
                             className="w-12 h-12 bg-slate-200 shadow-inner hover:bg-cyan-500 rounded-full grid justify-items-center content-center"
                         >
                             <FaPowerOff className="text-2xl text-white" />

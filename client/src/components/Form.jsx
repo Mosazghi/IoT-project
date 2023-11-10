@@ -14,7 +14,7 @@ const Form = ({ path }) => {
     const checkMark = path === "register" ? true : false;
     const navigatePath = path === "register" ? "/" : "/dashboard";
 
-    // Håndterer submit av formen
+    // Håndterer submit av formen{/* */}
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -33,9 +33,9 @@ const Form = ({ path }) => {
                     path: "/",
                 });
 
-                // I tilfelle en error så vises den på siden
+                // I tilfelle en error så vises den på siden{/* */}
                 setError(res.data.message);
-                // Navigerer til dashboard (eller login)
+                // Navigerer til dashboard (eller login){/* */}
                 navigate(navigatePath);
             })
             .catch((e) => {
@@ -44,7 +44,7 @@ const Form = ({ path }) => {
             });
     };
 
-    // Returnerer en form som enten viser login eller register
+    // Returnerer en form som enten viser login eller register{/* */}
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
             <div className="flex">
@@ -61,7 +61,7 @@ const Form = ({ path }) => {
                                     <p className="text-black mt-10">Username</p>
                                 </div>
                                 <input 
-                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner pl-2 mt-2" //input feltet for brukernavn
+                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner pl-2 mt-2" //input feltet for brukernavn{/* */}  
                                     value={username}
                                     name="username"
                                     type="text"
@@ -74,7 +74,7 @@ const Form = ({ path }) => {
                                     <p className="text-black mt-3">Password</p>
                                 </div>
                                 <input
-                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner  pl-2 mt-2" //input feltet for passord
+                                    className="border-2 w-72 h-10 rounded-2xl shadow-inner  pl-2 mt-2" //input feltet for passord{/* */}
                                     value={password}
                                     name="password"
                                     type="password"
@@ -84,8 +84,8 @@ const Form = ({ path }) => {
                             </div>
                         </div>
                         
-                        <div className="mt-2 flex items-center gap-3 justify-center"> // knappene for å logge inn og registrere seg
-                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />} // registrer admin eller ansatt
+                        <div className="mt-2 flex items-center gap-3 justify-center"> // knappene for å logge inn og registrere seg{/* */}
+                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />} // registrer admin eller ansatt{/* */}
                             <button className="< bg-cyan-500 shadow-lg shadow-cyan-500/50 hover:bg-cyan-400 text-white w-20 h-10 rounded-2xl ">
                                 {checkMark ? "REGISTER" : "LOGIN"}
                             </button>
@@ -94,7 +94,7 @@ const Form = ({ path }) => {
                             </Link>
                         </div>
 
-                        {error && <p className="text-red-500 text-center mt-2">{error}</p>} // viser feilmelding
+                        {error && <p className="text-red-500 text-center mt-2">{error}</p>} // viser feilmelding{/* */}
                        </div>
                     </div>
             </div>

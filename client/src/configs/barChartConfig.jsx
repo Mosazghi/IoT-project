@@ -26,6 +26,11 @@ const barChartConfig = (statsData) => {
                 time: {
                     unit: "day",
                 },
+                title: {
+                    display: true,
+                    text: "Dato",
+                    font: { size: 22, weight: "bold" },
+                },
                 ticks: {
                     display: true,
                     font: {

@@ -21,6 +21,11 @@ const lineChartConfig = (sensorData) => {
                 time: {
                     unit: "day",
                 },
+                title: {
+                    display: true,
+                    text: "Tid",
+                    font: { size: 22, weight: "bold" },
+                },
                 ticks: {
                     display: true,
                     font: {
@@ -49,7 +54,7 @@ const lineChartConfig = (sensorData) => {
             },
             title: {
                 display: true,
-                text: "Nåværende strømforbruk [kWh]",
+                text: "Sanntidsmåling av strømforbruk [kWh]",
                 font: {
                     size: 30,
                     weight: "bold",

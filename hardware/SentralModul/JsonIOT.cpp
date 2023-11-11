@@ -27,6 +27,7 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     dtostrf(data[2], 1, 2, co2valString);  
     dtostrf(data[3], 1, 2, pressureString); 
     
+    Serial.print("Temperature: ");
     Serial.println(temperatureString);
     Serial.print("Humidity: ");
     Serial.println(humidityString);

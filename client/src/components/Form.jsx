@@ -84,8 +84,8 @@ const Form = ({ path }) => {
                             </div>
                         </div>
                         
-                        <div className="mt-2 flex items-center gap-3 justify-center"> // knappene for å logge inn og registrere seg{/* */}
-                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />} // registrer admin eller ansatt{/* */}
+                        <div className="mt-2 flex items-center gap-3 justify-center"> {/*knappene for å logge inn og registrere seg*/}
+                        {checkMark && <RegisterCheckmark isAdmin={admin} setAdmin={setAdmin} />} {/*registrer admin eller ansatt*/}
                             <button className="< bg-cyan-500 shadow-lg shadow-cyan-500/50 hover:bg-cyan-400 text-white w-20 h-10 rounded-2xl ">
                                 {checkMark ? "REGISTER" : "LOGIN"}
                             </button>
@@ -94,7 +94,7 @@ const Form = ({ path }) => {
                             </Link>
                         </div>
 
-                        {error && <p className="text-red-500 text-center mt-2">{error}</p>} // viser feilmelding{/* */}
+                        {error && <p className="text-red-500 text-center mt-2">{error}</p>} {/*viser feilmelding*/}
                        </div>
                     </div>
             </div>

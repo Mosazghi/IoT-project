@@ -16,15 +16,19 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
         navigate("/");
     };
 
-    const handleShowUser = () => { 
+    const handleShowUser = () => {
         toggleSwitch();
     };
 
     return (
         <div className="w-full pt-2">
             {/* Header boks */}
-            <header className="bg-white transition-all flex flex-row drop-shadow-md  p-3 justify-between items-start items-center mb-5 rounded-3xl  ">
-                <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold ">DASHBOARD</h1>{/*Overskrift*/}
+            
+            <header className="bg-white transition-all flex flex-row drop-shadow-md  p-3 justify-between items-start mb-5 rounded-3xl  ">
+                <h1 className="ms-5 text-xl md:text-5xl xl:text-7xl font-bold ">
+                    {user.admin ? "ADMIN DASHBOARD" : "DASHBOARD"}
+                </h1>
+
                 <div className="flex justify-items-end gap-2">
                     {/* Iconer top jøyre */}
                     <div>
@@ -36,9 +40,9 @@ const DashboardHeader = ({ user, toggleSwitch, showData }) => {
                             > {/* Change the icon based on the state */}
                             {showData? <FaQrcode className="text-2xl text-white"/> : <FaDatabase className="text-2xl text-white"/>}
                             </button>
-                    )}
+                        )}
                     </div>
-                    <div className="flex justify-center flex-col">
+                    <div className="flex justify-center items-center flex-col">
                         <button
                             onClick={() => setShowUser(!showUser)}
                             onTouchMove={() => setShowUser(!showUser)} 

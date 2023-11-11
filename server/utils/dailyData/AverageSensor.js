@@ -16,6 +16,12 @@ const getAverageSensorData = async () => {
             },
         },
     ]);
+    
+    // Runder av strømforbruk til 2 desimaler
+    averageTemperature.forEach((temp) => {
+        temp.averageTemp = Math.round(temp.averageTemp * 100) / 100;
+    });
+    
     return averageTemperature;
 };
 

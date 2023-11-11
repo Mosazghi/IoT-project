@@ -5,23 +5,23 @@ const getAverageSensorData = async () => {
         {
             $group: {
                 _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } },
-                averageTemp: { $avg: "$data.temperature" },
+                averageEnergy: { $avg: "$data.temperature" },
             },
         },
         {
             $project: {
                 _id: 0,
                 id: "$_id",
-                averageTemp: 1,
+                averageEnergy: 1,
             },
         },
     ]);
-    
+
     // Runder av strømforbruk til 2 desimaler
     averageTemperature.forEach((temp) => {
-        temp.averageTemp = Math.round(temp.averageTemp * 100) / 100;
+        temp.averageEnergy = Number(temp.averageEnergy * 0.002).toFixed(3);
     });
-    
+
     return averageTemperature;
 };
 

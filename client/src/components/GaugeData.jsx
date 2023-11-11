@@ -15,7 +15,7 @@ const GaugeData = ({ value, min, max, unit }) => {
                 needleTransitionDuration={1000}
                 needleColor="black"
                 startColor="green"
-                segments={10}
+                segments={5}
                 endColor="red"
                 currentValueText={`${value} ${unit}`}
             />

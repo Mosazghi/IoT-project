@@ -24,7 +24,7 @@ initRecieveQRCodes();
 initRecieveSensorData();
 
 // Sender daglig data til clienten (pr 1 minutt)
-setInterval(getDailyData, 1000 * 60);
+setInterval(getDailyData, 1000 * 2);
 
 // Request-logger
 app.use((req, res, next) => {

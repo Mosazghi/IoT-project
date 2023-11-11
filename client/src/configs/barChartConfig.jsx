@@ -5,7 +5,7 @@ const barChartConfig = (statsData) => {
         datasets: [
             {
                 label: "Strømforbruk i kWh",
-                data: statsData.map((data) => data.averageTemp),
+                data: statsData.map((data) => data.averageEnergy),
                 backgroundColor: "rgb(255, 99, 132)",
                 font: {
                     size: 30,
@@ -60,7 +60,19 @@ const barChartConfig = (statsData) => {
                 align: "end",
                 anchor: "end",
                 font: {
-                    size: 26,
+                    size: 21,
+                    weight: "bold",
+                },
+            },
+            tooltip: {
+                caretSize: 18,
+                boxWidth: 18,
+                titleFont: {
+                    size: 18,
+                    weight: "bold",
+                },
+                bodyFont: {
+                    size: 18,
                     weight: "bold",
                 },
             },

@@ -35,7 +35,7 @@ int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
 void resetMeasuerment();
 void setup() {
   Serial.begin(115200);
-  mqttInit();
+  //mqttInit();
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
 
   // Set device as a Wi-Fi Station
@@ -68,11 +68,11 @@ void setup() {
   sgp.setIAQBaseline(0x8F25, 0x86C0); // Kalibreringsverdier (hentet fra eksempel)
   pinMode(relayPin, OUTPUT);
   digitalWrite(relayPin, LOW);
-  display.clearDisplay();
-  display.setTextColor(WHITE);
   // Once ESPNow is successfully Init, we will register for recv CB to
   // get recv packer info
   esp_now_register_recv_cb(OnDataRecv);
+  display.clearDisplay();
+  display.setTextColor(WHITE);
 }
 
 

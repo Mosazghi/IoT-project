@@ -1,6 +1,5 @@
 
 #define timeSeconds 5
-
 // Set GPIOs for LED and PIR Motion Sensor
 const int relayPin = 18;
 const int motionSensor = 19;
@@ -31,7 +30,7 @@ void setup() {
 }
 
 void loop() {
-  // Current time
+  //Current time
   now = millis();
   if((digitalRead(relayPin) == LOW) && (motion == false)) {
     Serial.println("MOTION DETECTED!!!");

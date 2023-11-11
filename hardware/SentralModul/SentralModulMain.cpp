@@ -133,7 +133,7 @@ void loop() {
     humidity = bme.readHumidity();
     c02 = sgp.eCO2;
     pressure = bme.readPressure();
-
+    pressure /= 1000.0F; 
     // if(measureCounter == 5) {
     //   sensorValues[0] /= 5;
     //   sensorValues[1] /= 5;

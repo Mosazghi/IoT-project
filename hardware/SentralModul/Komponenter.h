@@ -13,7 +13,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 Adafruit_BME280 bme;
 Adafruit_SGP30 sgp;
 
-
+extern float temperature;
+extern float humidity;
+extern float pressure;
+extern float c02;
 // PIR-Sensor
 const long interval = 3;
 unsigned long prevMillis = 0;
@@ -35,7 +38,7 @@ void displayTemp(){
   display.print("Temperatur: ");
   display.setTextSize(2);
   display.setCursor(0,10);
-  display.print(String(bme.readTemperature()));
+  display.print(String(temperature));
   display.print(" ");
   display.setTextSize(1);
   display.cp437(true);
@@ -51,7 +54,7 @@ void displayHumid(){
   display.print("Fuktighet: ");
   display.setTextSize(2);
   display.setCursor(0, 45);
-  display.print(String(bme.readHumidity()));
+  display.print(String(humidity));
   display.print(" %"); 
   display.display();
 }
@@ -63,7 +66,7 @@ void displayCO2(){
   display.print("CO2-nivaa: ");
   display.setTextSize(2);
   display.setCursor(0, 10);
-  display.print(String(sgp.eCO2));
+  display.print(String(c02));
   display.print("ppm"); 
   display.display();
 }
@@ -75,7 +78,7 @@ void displayPressure(){
   display.print("Trykknivaa: ");
   display.setTextSize(2);
   display.setCursor(0, 45);
-  display.print(String(int(bme.readPressure())));
-  display.print(" hPa"); 
+  display.print(String(pressure));
+  display.print(" kPa"); 
   display.display();
 }

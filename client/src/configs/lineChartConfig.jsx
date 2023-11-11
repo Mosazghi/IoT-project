@@ -4,11 +4,12 @@ const lineChartConfig = (sensorData) => {
         labels: sensorData.map((data) => data?.timestamp),
         datasets: [
             {
-                label: "Sensor Data",
+                label: "Strømforbruk i kWh ",
                 data: sensorData.map((data) => data?.data.temperature),
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.1,
+                pointRadius: 10,
             },
         ],
     };
@@ -18,24 +19,58 @@ const lineChartConfig = (sensorData) => {
             x: {
                 type: "time",
                 time: {
-                    unit: "minute",
+                    unit: "day",
+                },
+                title: {
+                    display: true,
+                    text: "Tid",
+                    font: { size: 22, weight: "bold" },
+                },
+                ticks: {
+                    display: true,
+                    font: {
+                        size: 22,
+                    },
                 },
             },
             y: {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: "Forbruk i kWh",
+                    text: "kWh",
+                    font: { size: 22, weight: "bold" },
                 },
                 ticks: {
                     display: true,
+                    font: {
+                        size: 20, // Change this value to make the x-axis labels larger or smaller
+                    },
                 },
             },
         },
         plugins: {
+            datalabels: {
+                display: false,
+            },
             title: {
                 display: true,
-                text: "Nåværende strømforbruk",
+                text: "Sanntidsmåling av strømforbruk [kWh]",
+                font: {
+                    size: 30,
+                    weight: "bold",
+                },
+            },
+            tooltip: {
+                caretSize: 18,
+                boxWidth: 18,
+                titleFont: {
+                    size: 18,
+                    weight: "bold",
+                },
+                bodyFont: {
+                    size: 18,
+                    weight: "bold",
+                },
             },
         },
         maintainAspectRatio: false,

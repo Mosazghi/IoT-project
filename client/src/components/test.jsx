@@ -10,11 +10,6 @@ const Test = () => {
             </div>
         </div>
         <div className="absolute top-0 inset-x-0 flex justify-center -mt-5">
-        {/*
-          <div className="bg-gray-800 text-white px-4 py-1 rounded-tl rounded-tr">
-            LOGIN
-          </div>
-        */}
         </div>
         <div className='grid gap-4 relative top-4'>
             <div className="mb-4 relative">
@@ -45,6 +40,8 @@ const Test = () => {
           id='admin'
           name='admin'
           className='w-20 h-18 peer hidden'
+          checked={isAdmin}
+          onChange={(e) => setAdmin(e.target.checked)}
           >
           </input>
           <label

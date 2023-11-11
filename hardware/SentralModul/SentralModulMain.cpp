@@ -13,9 +13,10 @@
 #include "time.h"
 #include "Esp32Mottaker.h"
 #include "Komponenter.h"
+#define MEASURE_LEN 4 
 
 long lastMsg = 0; 
-const int INTERVAL = 5000; // 5 sekunders interval for sensoravlesning og sending 
+const int INTERVAL = 1000 * 3; // 10 sekunders interval for sensoravlesning og sending 
 
 // Dato konfigurasjon 
 const char* ntp = "pool.ntp.org";
@@ -28,11 +29,10 @@ float temperature = 0;
 float humidity = 0;
 float pressure = 0;
 float c02 = 0;
-
-float sensorValues[4]; // Array for sensorverdier
+float sensorValues[MEASURE_LEN]; // Array for sensorverdier
 
 int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
-
+void resetMeasuerment();
 void setup() {
   Serial.begin(115200);
   //mqttInit();
@@ -126,7 +126,7 @@ void loop() {
   
   /* MQTT */
   long now = millis();
-  if (now - lastMsg > 5000) { 
+  if (now - lastMsg > INTERVAL) { 
     lastMsg = now;
     
     temperature = bme.readTemperature();   
@@ -134,38 +134,27 @@ void loop() {
     c02 = sgp.eCO2;
     pressure = bme.readPressure();
 
-    if(measureCounter == 5) {
-      sensorValues[0] /= 5;
-      sensorValues[1] /= 5;
-      sensorValues[2] /= 5;
-      sensorValues[3] /= 5;
-      measureCounter = 0;
-
-      /*Serial monitor*/
-      Serial.println("------------------------------------------------------------");
-      Serial.println("\tROOM 100: ");
-      Serial.print("\t\tTemperatur = ");
-      Serial.print(bme.readTemperature());
-      Serial.println("°C");
-      Serial.print("\t\tFuktighet = ");
-      Serial.print(bme.readHumidity());
-      Serial.println(" %");
-      Serial.print("\t\teCO2-nivå = ");
-      Serial.print(sgp.eCO2);
-      Serial.print(sgp.eCO2); Serial.println(" ppm");
-      Serial.print("\t\tTrykknivå = ");
-      Serial.print(bme.readPressure() / 100.0F);
-      Serial.println(" hPa");
-      Serial.println("------------------------------------------------------------");
+    // if(measureCounter == 5) {
+    //   sensorValues[0] /= 5;
+    //   sensorValues[1] /= 5;
+    //   sensorValues[2] /= 5;
+    //   sensorValues[3] /= 5;
+    //   measureCounter = 0;
       
-      sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
-    }
-      
-    measureCounter++;
+    //   resetMeasuerment();
+    // }
+    // measureCounter++;
 
-    sensorValues[0] += temperature;
-    sensorValues[1] += humidity;
-    sensorValues[2] += c02;
-    sensorValues[3] += pressure;
+    sensorValues[0] = temperature;
+    sensorValues[1] = humidity;
+    sensorValues[2] = c02;
+    sensorValues[3] = pressure;
+    sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
+  }
+}
+
+void resetMeasuerment() {
+  for (int i = 0; i < MEASURE_LEN; i++) {
+    sensorValues[i] = 0;
   }
 }

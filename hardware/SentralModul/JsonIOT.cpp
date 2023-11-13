@@ -2,7 +2,7 @@
 #include "JsonIOT.h"
 
 /**
-*   @brief Sender dato og data til MQTT brokeren i Json format
+*   Sender dato og data til MQTT brokeren i Json format
 * 
 *   @param data float (sensor data som skal sendes)
 *   @param client Refreanse overført til PubSubClient client i main (MQTT klient)

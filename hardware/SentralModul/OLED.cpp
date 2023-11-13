@@ -4,7 +4,8 @@ extern Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1); // OLED
 int state = BME280_STATE; // State for å vise data på OLED-skjermen
 
 /**
-*   Viser temperatur på OLED-skjermen.
+* Viser temperatur på OLED-skjermen.
+* @param bme.readTemperature() - Temperaturverdien fra BME280-sensoren
 */
 void OLED::displayTemp(){
   display.setTextSize(1);
@@ -23,6 +24,7 @@ void OLED::displayTemp(){
 
 /**
 *   Viser fuktighet på OLED-skjermen.
+*   @param bme.readHumidity() - Fuktighetsverdien fra BME280-sensoren
 */
 void OLED::displayHumid(){
   display.setTextSize(1);
@@ -37,6 +39,7 @@ void OLED::displayHumid(){
 
 /**
 *   Viser CO2-nivå på OLED-skjermen.
+*   @param sgp.eCO2 - CO2-verdien fra SGP30-sensoren
 */
 void OLED::displayCO2(){
   display.setTextSize(1);
@@ -51,6 +54,7 @@ void OLED::displayCO2(){
 
 /**
 *   Viser trykknivå på OLED-skjermen.
+*   @param bme.readPressure() - Trykknivået fra BME280-sensoren
 */
 void OLED::displayPressure(){
   display.setTextSize(1);
@@ -75,7 +79,10 @@ void OLED::initDisplay() {
   display.clearDisplay();
   display.setTextColor(WHITE);
 }
-
+/**
+ * Viser data på OLED-skjermen i intervaller.
+ * Sjekker hvilken state den er i og viser dataen tilhørende den staten.
+*/
 void OLED::displayInIntervals() {
   display.clearDisplay();
 
@@ -90,6 +97,5 @@ void OLED::displayInIntervals() {
       OLED::displayPressure();
       state++;
   }
-
   display.display();
 }

@@ -1,25 +1,27 @@
 #ifndef ESPNOW_H
 #define ESPNOW_H
-
-// ESP32-RECEIVER
 #include <esp_now.h>
 
-// Structure example to receive data
-// Must match the sender structure
+// Struktur for data som skal sendes via ESP-NOW
 typedef struct struct_message {
   String stateMessage;
   bool sendingPirSensor;
-// int sendingButtonState;
 } struct_message;
-  // Create a struct_message called myData
+
   struct_message myData;
 
-  //int incomingButton;
-  bool incomingPirSensor;
+  // Variabler for å motta data fra ESP-NOW
+  bool incomingPirSensor; 
   String incomingMessage;
 
 namespace ESPNOW{
-    // callback function that will be executed when data is received
+   /**
+    * Callback-funksjon for å motta data
+    * 
+    * @param mac MAC-adressen til enheten som sendte data
+    * @param incomingData data som er mottatt
+    * @param len lengden på dataen som er mottatt
+   */
   void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
     memcpy(&myData, incomingData, sizeof(myData));
     incomingPirSensor = myData.sendingPirSensor;
@@ -28,14 +30,14 @@ namespace ESPNOW{
     Serial.println(len);
   }
 
+  // Initialiserer ESP-NOW
   void initEspNow() {
   if (esp_now_init() != ESP_OK) {
     Serial.println("Error initializing ESP-NOW");
     return;
   }
-  // Once ESPNow is successfully Init, we will register for recv CB to
-  // get recv packer info
-  esp_now_register_recv_cb(OnDataRecv);
+  // Registrerer callback-funksjonen når data mottas over ESP-NOW
+  esp_now_register_recv_cb(OnDataRecv); 
   }
 }
 #endif

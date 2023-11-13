@@ -3,6 +3,7 @@ import ReactSpeedometer from "react-d3-speedometer";
 const GaugeData = ({ value, min, max, unit }) => {
     console.log("value", value);
     value = parseFloat(value[value.length - 1]) ? parseFloat(value[value.length - 1]) : min;
+    // gauge grafen{/* */}
     return (
             <ReactSpeedometer
                 maxValue={max}

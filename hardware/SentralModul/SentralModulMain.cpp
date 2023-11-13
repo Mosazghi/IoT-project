@@ -13,11 +13,13 @@
 #include "EspNow.h"
 #include "OLED.h"
 #include "PIR.h"
+#define MEASURE_LEN 4   
 
 
 /* tidsintervall */
 unsigned long prevTime = 0;
 unsigned long currentTime = 0;
+const int INTERVAL = 1000 * 3;
 
 // Dato konfigurasjon 
 const char* ntp = "pool.ntp.org";
@@ -33,9 +35,12 @@ float c02 = 0;
 
 const int relayPin = 18; // Pin
 float sensorValues[4]; // Array for sensorverdier
+float sensorValues[MEASURE_LEN]; // Array for sensorverdier
+
 int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
 
 void showSensorValues();
+void resetMeasuerment();
 
 void setup() {
   Serial.begin(115200);
@@ -47,8 +52,6 @@ void setup() {
 
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
   WiFi.mode(WIFI_STA);
-
- 
 }
 
 
@@ -64,7 +67,7 @@ void loop() {
   PIR::activatePIR(relayPin, currentTime, incomingPirSensor);
 
   /* MQTT */
-  if (currentTime - prevTime > 5000) { 
+  if (currentTime - prevTime > INTERVAL) { 
     prevTime = currentTime;
 
     /* OLED-skjermvisning basert på tidsintervall */
@@ -74,6 +77,7 @@ void loop() {
     humidity = bme.readHumidity();
     c02 = sgp.eCO2;
     pressure = bme.readPressure();
+    pressure /= 1000.0F; 
 
     if(measureCounter == 5) {
       sensorValues[0] /= 5;
@@ -112,4 +116,10 @@ void showSensorValues() {
     Serial.print(bme.readPressure() / 100.0F);
     Serial.println(" hPa");
     Serial.println("------------------------------------------------------------");
+}
+
+void resetMeasuerment() {
+  for (int i = 0; i < MEASURE_LEN; i++) {
+    sensorValues[i] = 0;
+  }
 }

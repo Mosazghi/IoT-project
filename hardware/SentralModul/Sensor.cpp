@@ -1,8 +1,11 @@
 #include "Sensor.h"
 
-Adafruit_BME280 bme;
+Adafruit_BME280 bme; 
 Adafruit_SGP30 sgp;
 
+/**
+*   Initialiserer sensorer (trykk, temperaur, fuktighet og CO2)
+*/
 void SENSOR::initSensor() {
     if (!bme.begin(0x76)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
@@ -22,6 +25,9 @@ void SENSOR::initSensor() {
     sgp.setIAQBaseline(0x8F25, 0x86C0); // Kalibreringsverdier (hentet fra eksempel)
 }
 
+/**
+*   Sjekker målinger fra sensorer
+*/
 void SENSOR::checkMeasurement() {
     if (!sgp.IAQmeasure()) {
         Serial.println("Measurement failed");

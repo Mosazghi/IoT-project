@@ -5,11 +5,21 @@ bool startTimer = false;
 bool motion = false;
 unsigned long lastTrigger = 0;
 
+/**
+*  Initialiserer PIR-sensor
+*/
 void PIR::initPIR(const int relayPin) {
     pinMode(relayPin, OUTPUT);
     digitalWrite(relayPin, LOW);
 }
 
+/**
+*   Aktiverer PIR-sensor
+* 
+*   @param int relayPin - pin til PIR-sensor
+*   @param unsigned long currentTime - nåværende tid
+*   @param bool incomingPirSensor - boolsk verdi for PIR-sensor
+*/
 void PIR::activatePIR(const int relayPin, unsigned long currentTime, bool incomingPirSensor) {
     if(incomingPirSensor){
         startTimer = true;

@@ -1,7 +1,7 @@
 #include "OLED.h"
 
-extern Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
-int state = BME280_STATE;
+extern Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1); // OLED-skjerm
+int state = BME280_STATE; // State for å vise data på OLED-skjermen
 
 /**
 *   Viser temperatur på OLED-skjermen.
@@ -63,6 +63,9 @@ void OLED::displayPressure(){
   display.display();
 }
 
+/**
+*   Initialiserer OLED-skjermen.
+*/
 void OLED::initDisplay() {
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
   Serial.println(F("SSD1306 allocation failed"));

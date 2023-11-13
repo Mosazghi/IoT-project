@@ -99,6 +99,9 @@ void loop() {
   }
 }
 
+/**
+*  Viser sensorverdier i serial monitor
+*/
 void showSensorValues() {
   /*Serial monitor*/
     Serial.println("------------------------------------------------------------");
@@ -118,6 +121,9 @@ void showSensorValues() {
     Serial.println("------------------------------------------------------------");
 }
 
+/**
+*  Nullstiller målingene
+*/
 void resetMeasuerment() {
   for (int i = 0; i < MEASURE_LEN; i++) {
     sensorValues[i] = 0;

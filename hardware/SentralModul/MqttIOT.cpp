@@ -1,7 +1,14 @@
 #include "MqttIOT.h"
 
-PubSubClient client(espClient);
+PubSubClient client(espClient);   // MQTT-klient
 
+/**
+*   Mottar melding fra MQTT-brokeren
+*
+*   @param  topic - the subscribed to topic
+*   @param  message - the message sent from the broker
+*   @param  length - the length of the message
+*/
 void MQTT::mqttCallback(char *topic, byte *message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
@@ -15,6 +22,9 @@ void MQTT::mqttCallback(char *topic, byte *message, unsigned int length) {
   Serial.println();
 }
 
+/**
+*   Kobler pånytt til MQTT-brokeren
+*/
 void MQTT::mqttReconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
@@ -33,6 +43,10 @@ void MQTT::mqttReconnect() {
     }
   }
 }
+
+/**
+*   Initialiserer MQTT
+*/
 void MQTT::mqttInit() {
   wifiInit();
   client.setServer(MQTTSERVER, 1883);

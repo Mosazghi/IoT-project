@@ -1,3 +1,10 @@
+/**
+*   Koden initialiserer OLED-skjermen, skriver ut data og visualiserer dem i intervaller.
+*
+*   @file       OLED.cpp
+*   @author     Dider
+*/
+
 #include "OLED.h"
 
 extern Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1); // OLED-skjerm

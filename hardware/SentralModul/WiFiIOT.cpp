@@ -1,7 +1,10 @@
 #include "WiFiIOT.h"
 
-WiFiClient espClient;
+WiFiClient espClient; // WiFi-klient
 
+/**
+*   Initialiserer WiFi
+*/
 void wifiInit() {
   delay(10);
 

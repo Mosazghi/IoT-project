@@ -22,11 +22,11 @@ function DashboardPage() {
     return (
         <div className="my-0 min-h-full md:mx-4 bg-neutral-100">
             <DashboardHeader user={user} toggleSwitch={toggleSensorData} showData={showSensorData} />
-            {/* <h3 className="text-center text-2xl font-bold mb-5">
+            <h3 className="text-center text-2xl font-bold mb-5">
                 {isAdmin && showSensorData ? "Oversiktlig data" : `Hei ${user.name}, velkommen tilbake på jobb!`}
                 <br />
                 <h2 className="text-center text-lg">Vennligst skann QR-koden for å registrere deg inn.</h2>
-            </h3> */}
+            </h3>
             {isAdmin && showSensorData ? <SensorData /> : <QRData data={user.id} />}
         </div>
     );

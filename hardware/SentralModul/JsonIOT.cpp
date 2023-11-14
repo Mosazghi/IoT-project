@@ -44,7 +44,7 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
     doc["timestamp"] = timeBuffer;
 
-    // Create a JSON object for the "value" field
+    // Lage et JSON-objekt for sensordata
     JsonObject sensorJson = doc.createNestedObject("data");
     sensorJson["temperature"] = temperatureString;
     sensorJson["humidity"] = humidityString;
@@ -52,13 +52,10 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     sensorJson["pressure"] = temperatureString;
 
 
-    // Serialize JSON document
+    // Serialize JSON dokumentet til en buffer
     char jsonBuffer[512];
     serializeJson(doc, jsonBuffer);
 
-    // Print the JSON document
-    Serial.println(jsonBuffer);
-    Serial.println();
-
+    // Publisere til MQTT brokeren
     client.publish(topic, jsonBuffer);
 }

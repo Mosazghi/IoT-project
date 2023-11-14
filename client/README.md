@@ -4,7 +4,7 @@ Koden som er relatert til webapplikasjon er i client/src mappen. Inni mappen så
 <h2>Components</h2>
 I components vil du finne filer som innholder koden til komponenter som grafer, login/signup form og mye mer.
 <h2>Configs</h2>
-I Configs er "Settings" for komponenter som grafer, der vil du feks se styling av grafene vi har lagd.
+I Configs er "Settings" for komponenter som grafer, der vil du se styling av grafene vi har lagd.
 <h2>Layout</h2>
 Viser koden for "malen" for alle pages vi kommer til å få på nettsiden.
 <h2>pages</h2>

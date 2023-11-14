@@ -1,7 +1,14 @@
+/**
+*   Koden initialiserer trykk, temperatur, fuktighet og CO2 sensorer. 
+*
+*   @file       Sensor.cpp
+*   @author     Dider 
+*/
+
 #include "Sensor.h"
 
-Adafruit_BME280 bme; 
-Adafruit_SGP30 sgp;
+Adafruit_BME280 bme; // Lager et BME280 objekt
+Adafruit_SGP30 sgp; // Lager et SGP30 objekt
 
 
 /**

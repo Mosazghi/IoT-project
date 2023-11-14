@@ -1,3 +1,9 @@
+/**
+*   Koden kobler opp ESP32 til MQTT-brokeren
+*
+*   @file       MqttIOT.cpp
+*   @author     Mosazghi
+*/
 #include "MqttIOT.h"
 
 PubSubClient client(espClient);   // MQTT-klient
@@ -43,6 +49,9 @@ void MQTT::mqttReconnect() {
   }
 }
 
+/**
+*   Initialiserer MQTT
+*/
 void MQTT::mqttInit() {
   wifiInit();
   client.setServer(MQTTSERVER, 1883);

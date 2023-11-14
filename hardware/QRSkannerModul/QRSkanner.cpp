@@ -1,3 +1,9 @@
+/**
+*   Henter QR-kode og sender den til MQTT-brokeren. 
+*
+*   @file      QRSkanner.cpp
+*   @author    Abdirahman
+*/
 #include "QRSkanner.h"
 
 /**

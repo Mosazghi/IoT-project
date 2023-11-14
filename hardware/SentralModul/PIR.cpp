@@ -1,3 +1,9 @@
+/**
+*   Koden initialiserer PIR sensoren og aktiverer den.
+*
+*   @file       PIR.cpp
+*   @author     Dider
+*/
 #include "PIR.h"
 #define RELAY_PIN 18
 

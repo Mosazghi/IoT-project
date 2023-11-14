@@ -26,19 +26,18 @@ void MQTT::mqttCallback(char *topic, byte *message, unsigned int length) {
 *   Kobler pånytt til MQTT-brokeren
 */
 void MQTT::mqttReconnect() {
-  // Loop until we're reconnected
+  // Loop intill vi er koblet til
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
-    // Attempt to connect
+    // Prøver å koble til
     if (client.connect("ESP8266Client")) {
       Serial.println("connected");
-      // Subscribe
+      // Subscribe til topic
       client.subscribe("test");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
       delay(5000);
     }
   }

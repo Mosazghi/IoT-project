@@ -10,14 +10,14 @@
 *   @param time struct tm (datoen til dataen)
 */
 void sendJson(float data[], struct tm time, PubSubClient &client, const char* topic) {
-    // get the time
+    // Får tak i tiden
     if(!getLocalTime(&time)){
         Serial.println("Failed to obtain time");
         return;
     }
     Serial.println(&time, "%A, %B %d %Y %H:%M:%S");
  
-    // convert the value to a char array
+    // konverterer float til char
     char temperatureString[8];
     char humidityString[8];
     char co2valString[8];
@@ -36,15 +36,15 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     Serial.print("Pressure: ");   
     Serial.println(pressureString);
 
-    // Create the JSON document
+    // lager et JSON dokument
     StaticJsonDocument<200> doc;
     
-    // Set the values in the document
+    // Setter opp JSON dokumentet og legger til dato 
     char timeBuffer[32];
     strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
     doc["timestamp"] = timeBuffer;
 
-    // Create a JSON object for the "value" field
+    // Lager et JSON objekt og legger til sensor data
     JsonObject sensorJson = doc.createNestedObject("data");
     sensorJson["temperature"] = temperatureString;
     sensorJson["humidity"] = humidityString;
@@ -52,13 +52,14 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     sensorJson["pressure"] = temperatureString;
 
 
-    // Serialize JSON document
+    // Serialiserer JSON dokumentet
     char jsonBuffer[512];
     serializeJson(doc, jsonBuffer);
 
-    // Print the JSON document
+    // Skriver ut hvordan JSON dokumentet ser ut
     Serial.println(jsonBuffer);
     Serial.println();
 
+    // Sender JSON dokumentet til MQTT brokeren
     client.publish(topic, jsonBuffer);
 }

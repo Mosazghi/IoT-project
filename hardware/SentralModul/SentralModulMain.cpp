@@ -35,7 +35,7 @@ int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
 void resetMeasuerment();
 void setup() {
   Serial.begin(115200);
-  //mqttInit();
+  mqttInit();
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
 
   // Set device as a Wi-Fi Station

@@ -10,5 +10,5 @@ Viser koden for "malen" for alle pages vi kommer til å få på nettsiden.
 <h2>pages</h2>
 Dette viser all koden som kommer inn på hver side. Her kaller vi på komponenter som vi bruker på feks dashboard siden, så kaller vi på grafer.
 <h2>Utils</h2>
-Dette er sidene som setter opp sidene, og linker med paths til nettsiden.
+Setter opp sidene, og linker med paths til nettsiden.
 

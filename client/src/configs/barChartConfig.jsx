@@ -1,10 +1,5 @@
 // Konfigureringsfil for søylediagrammet
 const barChartConfig = (statsData) => {
-    statsData = [
-        { id: "2023-11-07", averageEnergy: 0.182, totalScans: 4 },
-        { id: "2023-11-08", averageEnergy: 0.197, totalScans: 2 },
-        { id: "2023-11-09", averageEnergy: 0.176, totalScans: 3 },
-    ];
     const dataBar = {
         labels: statsData.map((data) => data.id),
         datasets: [
@@ -43,7 +38,7 @@ const barChartConfig = (statsData) => {
                 ticks: {
                     display: false,
                     font: {
-                        size: 23, // Change this value to make the x-axis labels larger or smaller
+                        size: 23,
                     },
                 },
             },
@@ -53,8 +48,8 @@ const barChartConfig = (statsData) => {
             legend: {
                 labels: {
                     font: {
-                        size: 22, // Increase font size as needed
-                        family: "Helvetica", // Use your desired font family
+                        size: 22,
+                        family: "Helvetica",
                         weight: "bold",
                     },
                 },

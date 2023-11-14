@@ -1,11 +1,11 @@
 #ifndef PIRSENSOR_H
 #define PIRSENSOR_H
-#include <esp_now.h>
 #include <WiFi.h>
+#include <esp_now.h>
 
 /**
-*   Konstanter og variabler for PIR-sensoren
-*/
+ *   Konstanter og variabler for PIR-sensoren
+ */
 const int motionSensor = 18;
 unsigned long currentMillis = 0;
 unsigned long prevMillis = 0;

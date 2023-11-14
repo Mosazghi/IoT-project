@@ -6,16 +6,15 @@ const initRecieveQRCodes = () => {
     client.on("message", async (topic, message) => {
         if (topic === "qr") {
             const payload = JSON.parse(message.toString());
-            const codeData = payload.codeData; // Assuming payload contains the QR code data
-            const timestamp = payload.timestamp; // Assuming payload contains the QR code data
-            
+            const codeData = payload.codeData;
+            const timestamp = payload.timestamp;
+
             const newScan = new ScannedQRCode({
                 codeData: codeData,
                 timestamp: timestamp,
             });
 
             await newScan.save();
-            console.log("New scan saved to database", newScan);
         }
     });
 };

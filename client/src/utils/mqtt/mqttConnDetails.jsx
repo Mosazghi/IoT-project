@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Hook for å hente MQTT-tilkoblingsdetaljer fra server
+ * @returns {Object} connDetails
+ */
 export const useMqttConnDetails = () => {
     const [connDetails, setConnDetails] = useState(null);
 
@@ -12,15 +16,15 @@ export const useMqttConnDetails = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("MQTT Connection details :: ", data);
+                console.log("MQTT tilkoblingsdetaljer :: ", data);
                 setConnDetails(data);
             })
-            .catch((error) => console.error("Error getting MQTT Connection :", error));
+            .catch((error) => console.error("Error med å hente detaljer :", error));
     };
 
     useEffect(() => {
         fetchMQTTConnection();
     }, []);
-  
+
     return connDetails;
 };

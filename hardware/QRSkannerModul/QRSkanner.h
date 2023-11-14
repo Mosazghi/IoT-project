@@ -9,7 +9,7 @@ extern String QRdata;
 extern PubSubClient client;
 
 namespace QR {
-  void getQR();
+void getQR();
 }
 
 #endif

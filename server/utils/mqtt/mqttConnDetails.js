@@ -1,3 +1,4 @@
+// Sende MQTT-tilkoblingsdetaljer til clienten 
 const getMqttDetails = (req, res) => {
     res.send(
         JSON.stringify({

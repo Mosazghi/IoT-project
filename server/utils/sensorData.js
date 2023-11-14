@@ -4,7 +4,7 @@ import client from "./mqtt/mqttClient.js";
 // "Lytte" på nye sensor-data fra MQTT og lagre dem i databasen
 const initRecieveSensorData = () => {
     client.on("message", async (topic, message) => {
-        if (topic === "sensor") {
+        if (topic === "sensorData") {
             const { data, timestamp } = JSON.parse(message.toString());
             const newScan = new Sensor({
                 data: {
@@ -17,7 +17,6 @@ const initRecieveSensorData = () => {
             });
 
             await newScan.save();
-            console.log("New scan saved to database", newScan);
         }
     });
 };

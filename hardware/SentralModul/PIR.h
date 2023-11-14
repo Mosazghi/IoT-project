@@ -1,12 +1,11 @@
 #ifndef PIR_H
 #define PIR_H
 #include <Arduino.h>
-
-const int timeSeconds = 5;
+#define TIME_SECONDS 5
 
 namespace PIR {
-    void initPIR(const int relayPin);
-    void activatePIR(const int relayPin, unsigned long currentTime, bool incomingPirSensor);
-}
+void initPIR();
+void activatePIR(unsigned long currentTime, bool incomingPirSensor);
+} // namespace PIR
 
 #endif

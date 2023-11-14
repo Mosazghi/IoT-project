@@ -1,9 +1,10 @@
 /**
-*   Koden omskriver dataen til JSON format og sender det til MQTT brokeren.
-* 
-*   @file JsonIOT.cpp
-*   @authors Abdirahman og Mosazghi
-*/
+ *   Koden omskriver dataen til JSON format og sender det til MQTT brokeren.
+ *
+ *   @file JsonIOT.cpp
+ *   @authors Abdirahman og Mosazghi
+ */
+
 #include "JsonIOT.h"
 #include "stdlib_noniso.h"
 
@@ -11,26 +12,22 @@
  *   @brief Sender dato og data til MQTT brokeren i Json format
  *
  *   @param data float (sensor data som skal sendes)
- *   @param client Refreanse overført til PubSubClient client i main (MQTT * klient)
+ *   @param client Refreanse overført til PubSubClient client i main (MQTT klient)
  *   @param topic const char* (MQTT topic)
  *   @param time struct tm (datoen til dataen)
  */
-void sendJson(String data, struct tm time, PubSubClient &client, const char *topic) {
+void sendJson(String data, struct tm time, PubSubClient &client,
+              const char *topic) {
   // Får tak i tiden
   if (!getLocalTime(&time)) {
-    Serial.println("Failed to obtain time");
+    Serial.println("Feilet å hente tid!");
     return;
   }
-  Serial.println(&time, "%A, %B %d %Y %H:%M:%S");
-
-  // Skriver ut QR-data
-  Serial.print("qr-data: ");
-  Serial.println(data);
 
   // Lager et JSON dokument
   StaticJsonDocument<200> doc;
 
-  // skriver om til tiden til char på timestamp format 
+  // Skriver om til tiden til char på timestamp format
   char timeBuffer[32];
   strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
 

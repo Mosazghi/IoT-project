@@ -3,6 +3,9 @@ import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
+/**
+ *  Håndterer innlogging av brukere
+ */
 const handleLogin = asyncHandler(async (req, res) => {
     // Sjekk om bruker finnes
     const user = await User.findOne({ username: req.body.username.toLowerCase() });
@@ -32,6 +35,10 @@ const handleLogin = asyncHandler(async (req, res) => {
         }
     }
 });
+
+/**
+ * Håndterer registrering av brukere
+ */
 const handleRegister = asyncHandler(async (req, res) => {
     // Sjekk om bruker finnes
     const user = await User.findOne({ username: req.body.username.toLowerCase() });

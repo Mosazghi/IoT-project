@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 // CORS - for å kunne sende requests fra clienten
 app.use(cors());
 
-// Nødvendig for å kunne parse JSON
+// Nødvendig for å kunne parse JSON data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(errorHandler);
@@ -44,11 +44,8 @@ app.use(errorHandler);
 app.use("/user", userRouter);
 app.get("/mqttConnDetails", getMqttDetails);
 
-// Sett opp statisk mappe (bilder, etc.)
-app.use(express.static(path.join(__dirname, "..", "client/dist")));
-
 app.listen(PORT, () => {
-    console.log(`Server started on port  http://localhost:${PORT}`);
+    console.log(`Server startet på port:  http://localhost:${PORT}`);
 });
 
 export default app;

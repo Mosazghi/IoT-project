@@ -5,8 +5,8 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import NoPage from "./pages/NoPage";
 import RegisterPage from "./pages/RegisterPage";
-import ProtectedRoute from "./utils/ProtectedRoute";
 import TestPage from "./pages/TestPage";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
     console.log("App");

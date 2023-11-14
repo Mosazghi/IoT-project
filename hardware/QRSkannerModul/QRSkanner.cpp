@@ -1,25 +1,24 @@
 /**
-*   Henter QR-kode og sender den til MQTT-brokeren. 
-*
-*   @file      QRSkanner.cpp
-*   @author    Abdirahman
-*/
+ *   Henter QR-kode og sender den til MQTT-brokeren.
+ *
+ *   @file      QRSkanner.cpp
+ *   @author    Abdirahman
+ */
+
 #include "QRSkanner.h"
 
 /**
-*   Henter QR-kode fra QR-skanneren og sender den til MQTT-brokeren
-*/
+ *   Henter QR-kode fra QR-skanneren og sender den til MQTT-brokeren
+ */
 void QR::getQR() {
   String QRdata;
-  if (QRObj.available()){
+  if (QRObj.available()) {
     while (QRObj.available()) {
-      char input = QRObj.read();  
+      char input = QRObj.read();
       QRdata += input;
       delay(5);
     }
-    Serial.println(QRdata);
     sendJson(QRdata, dato, client, TOPIC);
-    Serial.println();
   }
   QRdata = "";
   delay(5);

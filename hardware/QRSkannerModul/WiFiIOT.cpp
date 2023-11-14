@@ -1,21 +1,22 @@
 /**
-*   Kobler ESP32 til WiFi.
-*
-*   @file WiFiIOT.cpp
-*   @author Mosazghi
-*/
+ *   Kobler ESP32 til WiFi.
+ *
+ *   @file WiFiIOT.cpp
+ *   @author Mosazghi
+ */
+
 #include "WiFiIOT.h"
 
-WiFiClient espClient; // WiFi-klient
+WiFiClient espClient; // Lager en WiFi-klient
 
 /**
-*   Initialiserer WiFi
-*/
+ *   Initialiserer WiFi
+ */
 void wifiInit() {
   delay(10);
 
   Serial.println();
-  Serial.print("Connecting to ");
+  Serial.print("Tilkobler til: ");
   Serial.println(SSID);
 
   WiFi.begin(SSID, PASSWORD);
@@ -25,8 +26,6 @@ void wifiInit() {
     Serial.print(".");
   }
 
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
+  Serial.println("WiFi tilkoblet");
   Serial.println(WiFi.localIP());
 }

@@ -1,5 +1,9 @@
 import Sensor from "../../models/sensorModel.js";
 
+/**
+ *
+ * @returns {Promise<Array<{id: string, averageEnergy: number}>>} Array av objekter med dato (ID) og gjennomsnittlig energiforbruk
+ */
 const getAverageSensorData = async () => {
     const averageTemperature = await Sensor.aggregate([
         {

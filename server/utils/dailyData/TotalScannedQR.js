@@ -1,5 +1,10 @@
 import ScannedQRCode from "../../models/scannedQRModel.js";
 
+/**
+ *  Henter totalt antall scanninger av QR-koder med tilhlørende dato
+ * 
+ *  @returns {Promise<Array<{id: string, totalScans: number}>>} Array av objekter med dato (ID) og totalScans
+ */
 const getTotalScannedQR = async () => {
     const totalScans = await ScannedQRCode.aggregate([
         {

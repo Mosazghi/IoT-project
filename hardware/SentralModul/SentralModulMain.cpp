@@ -7,13 +7,16 @@
  */
 
 /* Egne og eksterne biblioteker */
+#include "EmonLib.h"
 #include "EspNow.h"
 #include "JsonIOT.h"
 #include "OLED.h"
 #include "PIR.h"
 #include "time.h"
 #include <Arduino.h>
-#define MEASURE_LEN 4
+#define MEASURE_LEN 5
+
+EnergyMonitor emon1;
 
 /* Diverse intervaller */
 unsigned long prevTime = 0;
@@ -31,6 +34,7 @@ float temperature = 0;
 float humidity = 0;
 float pressure = 0;
 float c02 = 0;
+double Irms = watt = 0;
 float sensorValues[MEASURE_LEN]; // Array for sensorverdier
 
 int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
@@ -49,6 +53,8 @@ void setup() {
   OLED::initDisplay();
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
   WiFi.mode(WIFI_STA);
+
+  emon1.current(28, 30); // Initaliserer SCT013-030 (strømmåler)
 }
 
 void loop() {
@@ -68,23 +74,28 @@ void loop() {
 
     OLED::displayInIntervals();
 
+    Irms = emon1.calcIrms(1480); // Måler strøm
+
     temperature = bme.readTemperature();
     humidity = bme.readHumidity();
     c02 = sgp.eCO2;
     pressure = bme.readPressure();
     pressure /= 1000.0F;
+    watt = Irms * 230.0; // Regner ut watt (strøm * spenning)
 
     /**
-     * Gjennomsnittlig av fem målinger av sensorene for å minske datasendinger (edge computing)
-    */
+     * Gjennomsnittlig av fem målinger av sensorene for å minske datasendinger
+     * (edge computing)
+     */
     if (measureCounter == 5) {
       sensorValues[0] /= 5;
       sensorValues[1] /= 5;
       sensorValues[2] /= 5;
       sensorValues[3] /= 5;
+      sensorValues[4] /= 5;
       measureCounter = 0;
 
-      sendJson(sensorValues, dato, client, "sensor"); // send to MQTT broker
+      sendJson(sensorValues, dato, client, "sensorData"); // send to MQTT broker
       resetMeasuerment();
     }
     measureCounter++;
@@ -93,6 +104,7 @@ void loop() {
     sensorValues[1] += humidity;
     sensorValues[2] += c02;
     sensorValues[3] += pressure;
+    sensorValues[4] += watt;
   }
 }
 

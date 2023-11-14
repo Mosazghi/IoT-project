@@ -1,9 +1,10 @@
 /**
-*   Koden initialiserer PIR sensoren og aktiverer den.
-*
-*   @file       PIR.cpp
-*   @author     Dider
-*/
+ *   Koden initialiserer PIR sensoren og aktiverer den.
+ *
+ *   @file       PIR.cpp
+ *   @author     Dider
+ */
+
 #include "PIR.h"
 #define RELAY_PIN 18
 
@@ -37,7 +38,7 @@ void PIR::activatePIR(unsigned long currentTime, bool incomingPirSensor) {
   }
 
   // Slår av LED om tida har passert den innsatte tida
-  if (startTimer && (currentTime - lastTrigger > (timeSeconds * 1000))) {
+  if (startTimer && (currentTime - lastTrigger > (TIME_SECONDS * 1000))) {
     startTimer = false;
     motion = false;
     digitalWrite(RELAY_PIN, LOW);

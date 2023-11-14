@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 
+/**
+ * Middleware for å sjekke hvis bruker er logget inn
+ */
 const auth = async (request, response, next) => {
     try {
         // få tak i token fra request

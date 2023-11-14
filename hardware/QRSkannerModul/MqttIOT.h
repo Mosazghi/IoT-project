@@ -10,9 +10,8 @@
 extern PubSubClient client;
 
 namespace MQTT {
-  void mqttInit();
-  void mqttCallback(char *topic, byte *message, unsigned int length);
-  void mqttReconnect();
-}
+void mqttInit();
+void mqttReconnect();
+} 
 
 #endif

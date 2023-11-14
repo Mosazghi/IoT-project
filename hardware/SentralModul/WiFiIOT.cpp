@@ -1,16 +1,17 @@
 /**
-*   Kobler ESP32 til WiFi.
-*
-*   @file WiFiIOT.cpp
-*   @author Mosazghi
-*/
+ *   Kobler ESP32 til WiFi.
+ *
+ *   @file WiFiIOT.cpp
+ *   @author Mosazghi
+ */
+
 #include "WiFiIOT.h"
 
 WiFiClient espClient; // Lager en WiFi-klient
 
 /**
-*   Initialiserer WiFi
-*/
+ *   Initialiserer WiFi
+ */
 void wifiInit() {
   delay(10);
 

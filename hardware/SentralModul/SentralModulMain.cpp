@@ -44,12 +44,11 @@ void resetMeasuerment();
 
 void setup() {
   Serial.begin(115200);
-
+  mqttInit();
   MQTT::mqttInit();
   ESPNOW::initEspNow();
   PIR::initPIR(relayPin);
   OLED::initDisplay();
-
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
   WiFi.mode(WIFI_STA);
 }
@@ -97,28 +96,6 @@ void loop() {
     sensorValues[2] += c02;
     sensorValues[3] += pressure;
   }
-}
-
-/**
-*  Viser sensorverdier i serial monitor
-*/
-void showSensorValues() {
-  /*Serial monitor*/
-    Serial.println("------------------------------------------------------------");
-    Serial.println("\tROOM 100: ");
-    Serial.print("\t\tTemperatur = ");
-    Serial.print(bme.readTemperature());
-    Serial.println("°C");
-    Serial.print("\t\tFuktighet = ");
-    Serial.print(bme.readHumidity());
-    Serial.println(" %");
-    Serial.print("\t\teCO2-nivå = ");
-    Serial.print(sgp.eCO2);
-    Serial.print(sgp.eCO2); Serial.println(" ppm");
-    Serial.print("\t\tTrykknivå = ");
-    Serial.print(bme.readPressure() / 100.0F);
-    Serial.println(" hPa");
-    Serial.println("------------------------------------------------------------");
 }
 
 /**

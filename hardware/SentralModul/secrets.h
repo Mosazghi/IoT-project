@@ -1,2 +1,2 @@
-#define SSID "Abdi"
-#define PASSWORD "zxqp2111"
+#define SSID "mosa"
+#define PASSWORD "mosazghi123"

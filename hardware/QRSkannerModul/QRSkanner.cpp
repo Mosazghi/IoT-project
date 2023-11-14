@@ -1,5 +1,8 @@
 #include "QRSkanner.h"
 
+/**
+*   Henter QR-kode fra QR-skanneren og sender den til MQTT-brokeren
+*/
 void QR::getQR() {
   String QRdata;
   if (QRObj.available()){

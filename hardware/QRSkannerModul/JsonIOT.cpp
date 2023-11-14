@@ -10,34 +10,36 @@
  *   @param time struct tm (datoen til dataen)
  */
 void sendJson(String data, struct tm time, PubSubClient &client, const char *topic) {
-  //get the time
+  // Får tak i tiden
   if (!getLocalTime(&time)) {
     Serial.println("Failed to obtain time");
     return;
   }
   Serial.println(&time, "%A, %B %d %Y %H:%M:%S");
-  // convert the value to a char array
 
+  // Skriver ut QR-data
   Serial.print("qr-data: ");
   Serial.println(data);
 
-  // Create the JSON document
+  // Lager et JSON dokument
   StaticJsonDocument<200> doc;
 
-  // Set the values in the document
+  // skriver om til tiden til char på timestamp format 
   char timeBuffer[32];
   strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
 
+  // Setter inn QR-data og timestamp i JSON dokumentet
   doc["codeData"] = data;
   doc["timestamp"] = timeBuffer;
 
-  // Serialize JSON document
+  // Serialiserer JSON dokumentet
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
 
-  // Print the JSON document
+  // Skriver ut hvordan JSON dokumentet ser ut
   Serial.println(jsonBuffer);
   Serial.println();
 
+  // Sender JSON dokumentet til MQTT brokeren
   client.publish(topic, jsonBuffer);
 }

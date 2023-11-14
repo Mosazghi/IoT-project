@@ -2,7 +2,7 @@
 #include "JsonIOT.h"
 
 /**
-*   @brief Sender dato og data til MQTT brokeren i Json format
+*   Sender dato og data til MQTT brokeren i Json format
 * 
 *   @param data float (sensor data som skal sendes)
 *   @param client Refreanse overført til PubSubClient client i main (MQTT klient)
@@ -10,14 +10,14 @@
 *   @param time struct tm (datoen til dataen)
 */
 void sendJson(float data[], struct tm time, PubSubClient &client, const char* topic) {
-    // get the time
+    // Får tak i tiden
     if(!getLocalTime(&time)){
         Serial.println("Failed to obtain time");
         return;
     }
     Serial.println(&time, "%A, %B %d %Y %H:%M:%S");
  
-    // convert the value to a char array
+    // konverterer float til string
     char temperatureString[8];
     char humidityString[8];
     char co2valString[8];
@@ -26,36 +26,26 @@ void sendJson(float data[], struct tm time, PubSubClient &client, const char* to
     dtostrf(data[1], 1, 2, humidityString);
     dtostrf(data[2], 1, 2, co2valString);  
     dtostrf(data[3], 1, 2, pressureString); 
-    
-    Serial.print("Temperature: ");
-    Serial.println(temperatureString);
-    Serial.print("Humidity: ");
-    Serial.println(humidityString);
-    Serial.print("CO2-level: ");
-    Serial.println(co2valString);
-    Serial.print("Pressure: ");   
-    Serial.println(pressureString);
 
-    // Create the JSON document
+    // lager et JSON dokument
     StaticJsonDocument<200> doc;
     
-    // Set the values in the document
+    // Setter opp JSON dokumentet og legger til dato 
     char timeBuffer[32];
     strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%dT%H:%M:%S", &time);
     doc["timestamp"] = timeBuffer;
 
-    // Lage et JSON-objekt for sensordata
+    // Lager et JSON objekt og legger til sensor data
     JsonObject sensorJson = doc.createNestedObject("data");
     sensorJson["temperature"] = temperatureString;
     sensorJson["humidity"] = humidityString;
     sensorJson["co2"] = co2valString;
     sensorJson["pressure"] = temperatureString;
 
-
-    // Serialize JSON dokumentet til en buffer
+    // Serialiserer JSON dokumentet
     char jsonBuffer[512];
     serializeJson(doc, jsonBuffer);
 
-    // Publisere til MQTT brokeren
+    // Sender JSON dokumentet til MQTT brokeren
     client.publish(topic, jsonBuffer);
 }

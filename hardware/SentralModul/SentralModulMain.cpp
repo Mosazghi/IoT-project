@@ -50,6 +50,7 @@ void setup() {
   ESPNOW::initEspNow();
   PIR::initPIR();
   OLED::initDisplay();
+  SENSOR::initSensor();
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
   WiFi.mode(WIFI_STA);
 

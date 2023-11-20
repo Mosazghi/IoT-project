@@ -2,12 +2,11 @@
 
 ## Info om prosjektet
 
-<<<<<<< HEAD
 Denne repositorium dekker IoT-prosjeket gitt i emnet IELEG2001 - Datakommuikasjon ved NTNU Gjøvik. Prosjektet som gruppa ble enige om går ut på å lage en webapplikasjon som skal kunne vise data fra en sensorer. Sensordata inkluderer blant annet strømforbruk, QR-koder, temperatur, CO2. Dette er for å kunne overvåke og analysere data ved en industribedrift.
-=======
-<h2>Client</h2>
+
+## Client
+
 Client mappen vil vise deg koden for nettsiden, alt front-end. Denne mappen vil innholdet rammeværket React, det betyr at du kommer til å finne språk som HTML, CSS og rammeværk Tailwind.
->>>>>>> d2d7270360db81ab6adc5978c6a9ffb777329b9b
 
 Ovenfor vil du se flere forskjellige filer og mapper. Hovedkoden til prosjektet vil ligge i disse 3 mappene: ``client``, ``hardware`` og ``server``.
 

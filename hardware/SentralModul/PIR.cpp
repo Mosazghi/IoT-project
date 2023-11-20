@@ -6,7 +6,6 @@
  */
 
 #include "PIR.h"
-#define RELAY_PIN 18
 
 /* PIR intervall */
 bool startTimer = false;

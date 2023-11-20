@@ -34,7 +34,7 @@ float temperature = 0;
 float humidity = 0;
 float pressure = 0;
 float c02 = 0;
-double Irms = watt = 0;
+double Irms = 0, watt = 0;
 float sensorValues[MEASURE_LEN]; // Array for sensorverdier
 
 int measureCounter = 0; // Teller variabel for å få gjennomsnittlig måling
@@ -46,11 +46,11 @@ void resetMeasuerment();
  */
 void setup() {
   Serial.begin(115200);
-  mqttInit();
   MQTT::mqttInit();
   ESPNOW::initEspNow();
   PIR::initPIR();
   OLED::initDisplay();
+  SENSOR::initSensor();
   configTime(gmtOffset_sec, daylightOffset_sec, ntp);
   WiFi.mode(WIFI_STA);
 
@@ -75,7 +75,6 @@ void loop() {
     OLED::displayInIntervals();
 
     Irms = emon1.calcIrms(1480); // Måler strøm
-
     temperature = bme.readTemperature();
     humidity = bme.readHumidity();
     c02 = sgp.eCO2;
@@ -84,8 +83,8 @@ void loop() {
     watt = Irms * 230.0; // Regner ut watt (strøm * spenning)
 
     /**
-     * Gjennomsnittlig av fem målinger av sensorene for å minske datasendinger
-     * (edge computing)
+     * Gjennomsnittlig av fem målinger av sensorene 
+     * for å minske datasendinger (edge computing)
      */
     if (measureCounter == 5) {
       sensorValues[0] /= 5;
@@ -95,7 +94,7 @@ void loop() {
       sensorValues[4] /= 5;
       measureCounter = 0;
 
-      sendJson(sensorValues, dato, client, "sensorData"); // send to MQTT broker
+      sendJson(sensorValues, dato, client, "sensorData");
       resetMeasuerment();
     }
     measureCounter++;

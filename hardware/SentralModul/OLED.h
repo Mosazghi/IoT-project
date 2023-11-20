@@ -10,7 +10,6 @@ extern Adafruit_SSD1306 display;
 /* OLED-skjerm konfigurasjoner */
 const int SCREEN_WIDTH = 128;
 const int SCREEN_HEIGHT = 64;
-7
 
     // Hjelpevariabel for å vise data på OLED-skjermen
     const int BME280_STATE = 1;

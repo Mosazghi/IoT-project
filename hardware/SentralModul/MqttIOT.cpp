@@ -2,7 +2,7 @@
  *   Koden kobler opp ESP32 til MQTT-brokeren
  *
  *   @file       MqttIOT.cpp
- *   @author     Mosazghi
+ *   @author     Mosazghi, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "MqttIOT.h"

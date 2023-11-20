@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import TestPage from "./pages/TestPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
+// Her blir alle sidene importert og satt opp med 'react-router-dom'
 function App() {
     console.log("App");
     return (

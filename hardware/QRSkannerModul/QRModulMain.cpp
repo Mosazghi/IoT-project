@@ -2,7 +2,7 @@
  * Programkode for QR-skanneren modulen til prosjektet.
  *
  * @file QRModulMain.cpp
- * @author Abdirahman og Mosazghi.
+ * @author Abdirahman og Mosazghi, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "MqttIOT.h"

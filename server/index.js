@@ -1,8 +1,6 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
 import connectDB from "./config/db.config.js";
 import errorHandler from "./middleware/errorHandler.js";
 import userRouter from "./routes/user.route.js";
@@ -10,8 +8,6 @@ import getDailyData from "./utils/dailyData/getDailyData.js";
 import getMqttDetails from "./utils/mqtt/mqttConnDetails.js";
 import initRecieveQRCodes from "./utils/scannedQRCodesMqtt.js";
 import initRecieveSensorData from "./utils/sensorData.js";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const PORT = 5000;
 const app = express();

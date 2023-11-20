@@ -2,7 +2,7 @@
  *   Koden initialiserer PIR sensoren og aktiverer den.
  *
  *   @file       PIR.cpp
- *   @author     Dider
+ *   @author     Dider, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "PIR.h"

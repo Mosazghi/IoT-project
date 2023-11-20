@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaDatabase, FaDiagramNext, FaDiagramSuccessor, FaPowerOff, FaQrcode, FaUserLarge } from "react-icons/fa6";
+import { FaDatabase, FaPowerOff, FaQrcode, FaUserLarge } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookies";
 

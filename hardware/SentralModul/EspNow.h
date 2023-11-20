@@ -26,14 +26,11 @@ void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
   memcpy(&myData, incomingData, sizeof(myData));
   incomingPirSensor = myData.sendingPirSensor;
   incomingMessage = myData.stateMessage;
-  Serial.print("Bytes received: ");
-  Serial.println(len);
 }
 
 /* Initalisere ESP-NOW */
 void initEspNow() {
   if (esp_now_init() != ESP_OK) {
-    Serial.println("Error initializing ESP-NOW");
     return;
   }
   // Registrerer callback-funksjonen når data mottas over ESP-NOW

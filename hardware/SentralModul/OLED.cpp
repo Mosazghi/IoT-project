@@ -3,7 +3,7 @@
  * intervaller.
  *
  *   @file       OLED.cpp
- *   @author     Dider
+ *   @author     Dider, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "OLED.h"

@@ -2,7 +2,7 @@
  *   Koden omskriver dataen til JSON format og sender det til MQTT brokeren.
  *
  *   @file JsonIOT.cpp
- *   @authors Abdirahman og Mosazghi
+ *   @authors Abdirahman og Mosazghi, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "JsonIOT.h"

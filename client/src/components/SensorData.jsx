@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Bar, Line } from "react-chartjs-2";
-import ReactSpeedometer from "react-d3-speedometer";
 import barChartConfig from "../configs/barChartConfig";
 import configureCharts from "../configs/chartConfig";
 import lineChartConfig from "../configs/lineChartConfig";

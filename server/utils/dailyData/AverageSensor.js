@@ -1,7 +1,7 @@
 import Sensor from "../../models/sensorModel.js";
 
 /**
- *
+ *  Henter gjennomsnittlig energiforbruk for hver dag
  * @returns {Promise<Array<{id: string, averageEnergy: number}>>} Array av objekter med dato (ID) og gjennomsnittlig energiforbruk
  */
 const getAverageSensorData = async () => {

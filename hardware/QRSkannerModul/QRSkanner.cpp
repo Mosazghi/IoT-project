@@ -2,7 +2,7 @@
  *   Henter QR-kode og sender den til MQTT-brokeren.
  *
  *   @file      QRSkanner.cpp
- *   @author    Abdirahman
+ *   @author    Abdirahman, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "QRSkanner.h"

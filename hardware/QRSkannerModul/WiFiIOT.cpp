@@ -2,7 +2,7 @@
  *   Kobler ESP32 til WiFi.
  *
  *   @file WiFiIOT.cpp
- *   @author Mosazghi
+ *   @author Mosazghi, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "WiFiIOT.h"

@@ -3,7 +3,7 @@
  * Inneholder: OLED, BME280, SGP30, PIR-sensor, SCT013-030, ESP-NOW, MQTT.
  *
  * @file   SentralModulMain.cpp
- * @author Mosazghi, Abdirahman, Didier.
+ * @author Mosazghi, Abdirahman, Didier, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 /* Egne og eksterne biblioteker */

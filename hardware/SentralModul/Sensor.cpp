@@ -2,7 +2,7 @@
  *   Koden initialiserer trykk, temperatur, fuktighet og CO2 sensorer.
  *
  *   @file       Sensor.cpp
- *   @author     Dider
+ *   @author     Dider, Gruppe IoT prosjekt 3 Gjøvik
  */
 
 #include "Sensor.h"

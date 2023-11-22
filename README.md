@@ -8,9 +8,9 @@ Denne repositorium dekker IoT-prosjeket gitt i emnet IELEG2001 - Datakommuikasjo
 
 Client mappen vil vise deg koden for nettsiden, alt front-end. Denne mappen vil innholdet rammeværket React, det betyr at du kommer til å finne språk som HTML, CSS og rammeværk Tailwind.
 
-Ovenfor vil du se flere forskjellige filer og mapper. Hovedkoden til prosjektet vil ligge i disse 3 mappene: ``client``, ``hardware`` og ``server``.
+Ovenfor vil du se flere forskjellige filer og mapper. Hovedkoden til prosjektet vil ligge i disse 3 mappene: `client`, `hardware` og `server`.
 
-***I hver mappe vil du finne en ekstra ``README.md`` som forklarer (overordnet) programkoden i mer detalj.***
+**_I hver mappe vil du finne en ekstra `README.md` som forklarer (overordnet) programkoden i mer detaljer._**
 
 ### client
 

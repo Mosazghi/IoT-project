@@ -4,20 +4,20 @@
 
 Hardwaremappen består av 3 hovedmapper:
 
-- ``PIRModul``
-- ``QRSkannerModul``
-- ``SentralModul``
+- `PIRModul`
+- `QRSkannerModul`
+- `SentralModul`
 
 Merk at inni hvert av disse mappene, vil du finne en tom `.ino`-fil, dette er for multifilsprogram. Dette er for å gjøre det enklere å holde orden på koden.
 
 ## PIR MODUL
 
-I PIR modul vil du finnne koden som om handler en passive infrarød sensor og ESPNOW kode. Det er denne koden som gjør at vi kan sende data fra PIR sensoren til sentral modulen for å skru på lyset.
+Innenfor PIR-modulen finner du koden relatert til en passiv infrarød sensor og ESPNOW. Denne koden muliggjør overføring av data fra PIR-sensoren til den sentrale modulen, som aktiverer lyset.
 
 ## QR Skanner Modul
 
-I denne mappen så vil du finne kode for sending av data fra QR skanneren til MQTT. Du vil også finne kode for å koble til WiFi og hvordan vi kobler til MQTT.
+I QR-modulen finner du koden som håndterer overføring av data fra QR-skanneren til MQTT. Denne delen inneholder også kode for tilkobling til Wi-Fi og MQTT.
 
 ## Sentral Modul
 
-Dette er delen som tar for seg alle sensorenens målinger. I likehet med QR-modul, vil kunne du finne filer som omhandler tilkobling mellom enhetene og MQTT, samt WiFi. I tillegg hovrdan sensordata blir sendt til MQTT ved bruk av spesielle funksjoner som er laget for dette prosjektet (`sendJson(...)`).
+I denne delen blir det lagt fokus på håndtering av sensoravlesninger. Likt som i QR-modulen, er det her inkludert filer som behandler tilkoblingen mellom enhetene og MQTT, samt Wi-Fi-tilkoblinger. Det demonstreres også hvordan dataene blir behandlet ved edge computing før de sendes videre via MQTT.

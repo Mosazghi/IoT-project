@@ -2,24 +2,24 @@
 
 ## Om Client
 
-Koden som er relatert til webapplikasjon er i client/src mappen. Inni mappen så vil du finnne undermapper: ``components``, ``configs``, ``layouts``, ``pages`` og ``utils``.
+Koden som håndterer brukergrensesnittet i webapplikasjonen er lokalisert i client/src-mappen. Inne i denne mappen vil du finne flere undermapper: `components`, `configs`, `layouts`, `pages` og `utils`.
 
 ## components
 
-I components vil du finne filer som innholder koden til komponenter som grafer, login/signup form og mye mer. Dette er det som er "byggeklossene" til nettsiden, noe som React er god på.
+I components-mappen finnes filer som inneholder kode for ulike komponenter, inkludert grafer, innloggings-/registreringsskjemaer og andre elementer. Disse komponentene fungerer som grunnleggende "byggeklosser" for nettsiden.
 
 ## configs
 
-I configs er diverse konfigurasjonsfil for komponenter som grafer, der vil du f.eks. se hvordan grafene er konfigurert.
+I configs-mappen finner du ulike konfigurasjonsfiler for komponenter som grafer. Her kan du for eksempel se detaljene i konfigurasjonen av hvordan grafene er satt opp.
 
 ## layout
 
-Viser koden for "malen" for alle sidene, her er det header og footer som er felles for alle sidene.
+Layout-mappen inneholder koden som utgjør "malen" for alle nettsidene, hvor både **headeren** og **footeren**, som er felles for alle sidene, er inkludert.
 
 ## pages
 
-Dette viser all koden som kommer inn på hver side. Her kaller vi på komponenter som vi bruker på f.eks dashboard siden, så kaller vi på grafer (`SensorData`).
+Pages-mappen inneholder koden som brukes på hver enkelt side. Her blir komponenter, som benyttes på sider som dashboardet, innkalt. For eksempel hentes grafkomponenter som (`SensorData`).
 
 ## utils
 
-Her er det diverse funksjoner som blir brukt i komponentene, f.eks. funksjoner for tilkobling av MQTT.
+Innenfor utils-mappen finner du en rekke funksjoner som anvendes i ulike komponenter, slik som funksjoner for tilkobling til MQTT.

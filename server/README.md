@@ -2,11 +2,11 @@
 
 ## Om server
 
-Dette er koden som kjører på serveren. Denne koden er skrevet i JavaScript og er delt opp i flere mapper/filer.
+Koden som kjøres på serveren til webapplikasjonen er strukturert etter [Model-View-Controller-modellen](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) for å forenkle utviklingsprosessen. Serveren er utformet i JavaScript og oppdelt i flere filer.
 
 ## config
 
-For tilkobling av MongoDB database.
+I config-mappen etableres serverens tilkobling til databasen, som er MongoDB.
 
 ## controllers
 
@@ -22,7 +22,7 @@ Her er det modeller for brukere og sensordata, som blir brukt for databasen.
 
 ## routes
 
-Her er det ruter for innlogging og registrering av brukere. 
+Her er det ruter for innlogging og registrering av brukere.
 
 ## utils
 

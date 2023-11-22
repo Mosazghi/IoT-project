@@ -11,7 +11,7 @@ I config-mappen etableres serverens tilkobling til databasen, som er MongoDB.
 
 ## controllers
 
-Her håndteres det som har med brukere å gjøre, altså innlogging.
+Her håndteres det som har med brukere å gjøre, altså innlogging. Alt fra verifisering av brukernavn og passord, til registrering av bruker.
 
 ## middleware
 

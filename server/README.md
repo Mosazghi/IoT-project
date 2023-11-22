@@ -3,6 +3,7 @@
 ## Om server
 
 Koden som kjøres på serveren til webapplikasjonen er strukturert etter [Model-View-Controller-modellen](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) for å forenkle utviklingsprosessen. Serveren er utformet i JavaScript og oppdelt i flere filer.
+De relevante mappene: `config`, `controllers`, `middleware`, `models`, `routes` og `utils`
 
 ## config
 
